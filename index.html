@@ -726,7 +726,7 @@ const T = {
     already:"لقد أجبت عن هذا السؤال سابقاً — هذه مراجعة لإجابتك.",
     mIdle:"فعّل الأداة ثم انقر على نقطتين في الخريطة (أو على معلمين) لحساب المسافة.", mOn:"انقر على النقطة الأولى…", mOne:"انقر على النقطة الثانية…",
     mRes:"المسافة التقريبية (خط مستقيم):", km:"كم", fromTo:"من {a} إلى {b}", point:"نقطة",
-    base_offline:"خريطة عُمان (دون إنترنت)", base_positron:"CartoDB فاتحة", base_osm:"OpenStreetMap", base_sat:"صور فضائية ESRI",
+    base_offline:"خريطة عُمان (دون إنترنت)", base_topo:"طبوغرافية Esri", base_osm:"OpenStreetMap", base_sat:"صور فضائية ESRI",
     noteOffline:"الخريطة المدمجة تعمل دون اتصال بالإنترنت. طبقات البلاطات الحية تُفعَّل عند تشغيل الملف محلياً أو على GitHub Pages.",
     tilesFail:"تعذّر تحميل طبقة البلاطات هنا — تمت العودة إلى خريطة عُمان المدمجة.", tilesOk:"تم تفعيل الخريطة الحية.",
     b_heritage:"حارس التراث", b_nature:"صديق البيئة العُمانية", b_vision:"سفير رؤية 2040", b_grand:"بطل جغرافية عُمان",
@@ -750,7 +750,7 @@ const T = {
     already:"You already answered this one — here is your answer for review.",
     mIdle:"Turn the tool on, then click two points on the map (or two landmarks) to measure the distance.", mOn:"Click the first point…", mOne:"Click the second point…",
     mRes:"Approximate straight-line distance:", km:"km", fromTo:"From {a} to {b}", point:"Point",
-    base_offline:"Oman map (offline)", base_positron:"CartoDB Light", base_osm:"OpenStreetMap", base_sat:"ESRI Satellite",
+    base_offline:"Oman map (offline)", base_topo:"Esri Topographic", base_osm:"OpenStreetMap", base_sat:"ESRI Satellite",
     noteOffline:"The built-in map works with no internet. Live tile layers activate when you run the file locally or on GitHub Pages.",
     tilesFail:"Tile layer can't load here — switched back to the built-in Oman map.", tilesOk:"Live map enabled.",
     b_heritage:"Heritage Guardian", b_nature:"Nature Explorer", b_vision:"Vision 2040 Ambassador", b_grand:"Grand Oman Geographer",
@@ -821,8 +821,8 @@ drawLabels();
 
 const BASES = {
   offline: offline,
-  positron: L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains:"abcd", maxZoom:19,
-    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>' }),
+  topo: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", { maxZoom:18,
+    attribution:'Tiles &copy; Esri — Esri, HERE, Garmin, OpenStreetMap contributors' }),
   osm: L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19,
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }),
   sat: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom:18,
@@ -848,9 +848,9 @@ function setBase(key, silent){
 /* Auto-upgrade to live tiles when they're reachable (local / GitHub Pages) */
 (function probeTiles(){
   const img = new Image(); let done = false;
-  img.onload = () => { if (!done) { done = true; setBase("positron", true); } };
+  img.onload = () => { if (!done) { done = true; setBase("osm", true); } };
   img.onerror = () => { done = true; };
-  img.src = "https://a.basemaps.cartocdn.com/light_all/5/21/13.png";
+  img.src = "https://tile.openstreetmap.org/5/21/13.png";
   setTimeout(() => { done = true; }, 4000);
 })();
 
@@ -1099,7 +1099,7 @@ $("measureClear").onclick = () => { measureLayer.clearLayers(); S.mPts = []; mLa
 
 /* ---------- 3.15 Basemap switcher ---------- */
 function renderBasemaps(){
-  $("basemaps").innerHTML = ["offline","positron","osm","sat"].map(k =>
+  $("basemaps").innerHTML = ["offline","osm","topo","sat"].map(k =>
     `<label><input type="radio" name="base" value="${k}" ${S.base === k ? "checked" : ""}> ${esc(t("base_" + k))}</label>`).join("");
   $("baseNote").textContent = S.base === "offline" ? t("noteOffline") : "";
 }
