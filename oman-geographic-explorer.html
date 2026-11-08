@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مستكشف عُمان الجغرافي | Oman Geographic Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   A) LEAFLET CORE CSS (inlined essentials, v1.9 compatible)
+   ===================================================================== */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
+.leaflet-container{overflow:hidden;-webkit-tap-highlight-color:transparent;font-family:'Cairo',sans-serif}
+.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{user-select:none;-webkit-user-drag:none}
+.leaflet-tile{visibility:hidden}.leaflet-tile-loaded{visibility:inherit}
+.leaflet-container img.leaflet-tile{max-width:none!important;max-height:none!important;width:256px;height:256px}
+.leaflet-container .leaflet-overlay-pane svg,.leaflet-container .leaflet-marker-pane img{max-width:none!important;max-height:none!important}
+.leaflet-container.leaflet-touch-zoom{touch-action:pan-x pan-y}
+.leaflet-container.leaflet-touch-drag{touch-action:none}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{touch-action:none}
+.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}
+.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}
+.leaflet-control{position:relative;z-index:800;pointer-events:auto;float:left;clear:both}
+.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}
+.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}
+.leaflet-right .leaflet-control{float:right}
+.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}
+.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}
+.leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}
+.leaflet-zoom-animated{transform-origin:0 0}
+.leaflet-zoom-anim .leaflet-zoom-animated{will-change:transform;transition:transform .25s cubic-bezier(0,0,.25,1)}
+.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{transition:none}
+.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}
+.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:grab}
+.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}
+.leaflet-popup-pane,.leaflet-control{cursor:auto}
+.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:grabbing}
+.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}
+.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive{pointer-events:auto}
+.leaflet-bar{box-shadow:0 2px 8px rgba(29,53,87,.25);border-radius:10px;overflow:hidden}
+.leaflet-bar a{background:#fff;border-bottom:1px solid #e3e3e3;width:36px;height:36px;line-height:36px;display:block;text-align:center;text-decoration:none;color:#1D3557;font:700 20px/36px 'Cairo',sans-serif}
+.leaflet-bar a:last-child{border-bottom:none}.leaflet-bar a:hover{background:#f4ede2}
+.leaflet-bar a.leaflet-disabled{cursor:default;color:#bbb}
+.leaflet-popup{position:absolute;text-align:center;margin-bottom:22px}
+.leaflet-popup-content-wrapper{padding:0;text-align:start;border-radius:16px;overflow:hidden}
+.leaflet-popup-content{margin:0;line-height:1.5;min-height:1px;width:300px}
+.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}
+.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;transform:rotate(45deg)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#1d2a3a;box-shadow:0 10px 30px rgba(29,53,87,.3)}
+.leaflet-container a.leaflet-popup-close-button{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.85);text-align:center;font:700 18px/28px Tahoma,sans-serif;color:#1D3557;text-decoration:none;z-index:2}
+.leaflet-tooltip{position:absolute;padding:4px 10px;background:#1D3557;color:#fff;border-radius:8px;white-space:nowrap;user-select:none;pointer-events:none;font:600 13px 'Cairo',sans-serif;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.leaflet-control-scale-line{border:2px solid #1D3557;border-top:none;line-height:1.1;padding:2px 6px;font:600 11px 'Cairo',sans-serif;white-space:nowrap;box-sizing:border-box;background:rgba(255,255,255,.85);color:#1D3557}
+.leaflet-control-attribution{background:rgba(255,255,255,.8);margin:0;padding:0 6px;color:#555;font-size:10px;border-radius:6px 0 0 0}
+.leaflet-control-attribution a{color:#457B9D}
+
+/* =====================================================================
+   B) DESIGN SYSTEM — Omani landscape palette
+   ===================================================================== */
+:root{
+  --sand:#D4A373; --sand-l:#F3E6D3; --cream:#FBF7F0; --teal:#1D3557; --slate:#457B9D;
+  --emerald:#1B9C6B; --gold:#E3B23C; --ink:#1d2a3a; --muted:#5f6f82; --line:#e7dccb;
+  --heritage:#B9722E; --nature:#2E9E62; --modern:#1A8FC9;
+  --ok:#22A06B; --bad:#D64545;
+  --radius:16px; --shadow:0 6px 24px rgba(29,53,87,.12);
+  --head-h:66px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:'Cairo',system-ui,sans-serif;color:var(--ink);background:var(--cream)}
+button{font-family:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* ---------- Header ---------- */
+header{height:var(--head-h);display:flex;align-items:center;gap:14px;padding:0 16px;
+  background:linear-gradient(120deg,var(--teal) 0%,#24486e 55%,var(--slate) 100%);color:#fff;position:relative;z-index:1100;
+  box-shadow:0 4px 18px rgba(29,53,87,.3)}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-logo{width:42px;height:42px;flex:none}
+.brand h1{margin:0;font-size:20px;font-weight:900;line-height:1.1;white-space:nowrap}
+.brand small{display:block;font-size:12px;font-weight:600;color:#f6deb8;white-space:nowrap}
+.head-stats{display:flex;gap:8px;margin-inline-start:auto;align-items:center}
+.stat-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;padding:5px 12px;font-weight:700;font-size:14px;white-space:nowrap}
+.stat-pill b{font-size:17px;color:var(--gold)}
+.stat-pill.bump{animation:bump .6s ease}
+@keyframes bump{30%{transform:scale(1.18);background:rgba(227,178,60,.45)}}
+.head-btn{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;
+  padding:7px 12px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.head-btn:hover{background:rgba(255,255,255,.2)}
+.head-btn.gold{background:var(--gold);color:var(--teal);border-color:var(--gold)}
+.head-btn.gold[disabled]{opacity:.55;cursor:not-allowed}
+
+/* ---------- Layout ---------- */
+.app{display:grid;grid-template-columns:370px 1fr;height:calc(100% - var(--head-h))}
+aside{background:var(--cream);border-inline-end:1px solid var(--line);overflow-y:auto;padding:14px 14px 90px;scrollbar-width:thin}
+#mapWrap{position:relative}
+#map{position:absolute;inset:0;background:#cfe4ec}
+
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-bottom:12px;box-shadow:0 2px 10px rgba(29,53,87,.05)}
+.panel h2{margin:0 0 10px;font-size:15px;font-weight:800;color:var(--teal);display:flex;align-items:center;gap:8px}
+.panel h2 .count{margin-inline-start:auto;font-size:12px;color:var(--muted);font-weight:700}
+
+/* Category filter chips */
+.cat-chips{display:grid;gap:8px}
+.cat-chip{display:flex;align-items:center;gap:10px;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 10%,#fff);
+  border-radius:12px;padding:7px 10px;font-weight:700;font-size:14px;color:var(--ink);text-align:start;transition:.2s}
+.cat-chip .dot{width:30px;height:30px;border-radius:50%;background:var(--c);display:grid;place-items:center;flex:none}
+.cat-chip .dot svg{width:18px;height:18px}
+.cat-chip .n{margin-inline-start:auto;font-size:12px;background:#fff;border-radius:999px;padding:1px 8px;border:1px solid var(--line)}
+.cat-chip[aria-pressed="false"]{border-color:#ddd;background:#f6f6f6;color:#999;filter:grayscale(1)}
+
+/* Governorate ribbon */
+.gov-ribbon{display:flex;flex-wrap:wrap;gap:6px}
+.gov-chip{border:1px solid var(--line);background:var(--sand-l);color:var(--teal);border-radius:999px;padding:5px 11px;font-weight:700;font-size:13px;transition:.2s}
+.gov-chip:hover{background:#ecd6b7}
+.gov-chip.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.gov-chip .tick{color:var(--ok);font-weight:900}
+.gov-chip.active .tick{color:var(--gold)}
+
+/* Governorate showcase card */
+.gov-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff;margin-bottom:12px;box-shadow:var(--shadow);animation:rise .35s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.gov-card .top{background:linear-gradient(135deg,var(--sand),#c08552);color:#fff;padding:12px 14px;position:relative}
+.gov-card .top h3{margin:0;font-size:20px;font-weight:900}
+.gov-card .top span{font-size:12px;font-weight:600;opacity:.9}
+.gov-card .top .x{position:absolute;inset-inline-end:10px;top:10px;background:rgba(255,255,255,.25);border:0;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px}
+.gov-row{display:flex;gap:10px;padding:9px 14px;border-top:1px solid #f1ebe1;font-size:13.5px;line-height:1.6}
+.gov-row .ic{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:16px;background:var(--sand-l)}
+.gov-row b{display:block;color:var(--slate);font-size:12px}
+
+/* Landmark list */
+.lm-list{display:grid;gap:6px;max-height:300px;overflow:auto;padding-inline-end:2px}
+.lm-item{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 8px;text-align:start;font-size:13px;font-weight:600;color:var(--ink)}
+.lm-item:hover{border-color:var(--slate);background:#f6f9fc}
+.lm-item .sw{width:10px;height:10px;border-radius:50%;flex:none}
+.lm-item .st{margin-inline-start:auto;font-size:13px}
+
+/* Badges */
+.badges{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.badge{border:1px dashed #d5c7b2;border-radius:12px;padding:8px;text-align:center;background:#fffdf9;position:relative}
+.badge .em{font-size:28px;filter:grayscale(1) opacity(.45);transition:.3s;display:block}
+.badge .nm{font-size:12.5px;font-weight:800;color:var(--muted);display:block;line-height:1.35}
+.badge .pr{height:6px;background:#efe6d8;border-radius:9px;margin-top:6px;overflow:hidden}
+.badge .pr i{display:block;height:100%;background:linear-gradient(90deg,var(--sand),var(--gold));border-radius:9px;transition:width .5s}
+.badge .ct{font-size:11px;color:var(--muted);font-weight:700}
+.badge.earned{border:2px solid var(--gold);background:linear-gradient(160deg,#fff8e6,#fff)}
+.badge.earned .em{filter:none;animation:pop .6s ease}
+.badge.earned .nm{color:var(--teal)}
+@keyframes pop{40%{transform:scale(1.35) rotate(-8deg)}}
+
+/* Tools */
+.tool-row{display:flex;gap:8px;flex-wrap:wrap}
+.tbtn{flex:1;min-width:120px;border:2px solid var(--slate);background:#fff;color:var(--teal);border-radius:12px;padding:8px 10px;font-weight:800;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:6px}
+.tbtn.on{background:var(--slate);color:#fff}
+.tbtn.ghost{border-color:var(--line);color:var(--muted)}
+.measure-out{margin-top:8px;font-size:13px;background:#f3f7fb;border-radius:10px;padding:8px 10px;color:var(--teal);font-weight:600;line-height:1.6}
+.measure-out strong{font-size:20px;color:var(--modern)}
+.basemaps{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.basemaps label{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:10px;padding:6px 8px;cursor:pointer;background:#fff}
+.basemaps input{accent-color:var(--teal)}
+.note{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+
+/* ---------- Custom markers ---------- */
+.om-pin{position:relative;width:36px;height:46px}
+.om-pin svg.pin{position:relative;z-index:2;transition:transform .2s;transform-origin:50% 100%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
+.om-pin:hover svg.pin,.om-pin.sel svg.pin{transform:scale(1.18) translateY(-2px)}
+.om-pin .pulse{position:absolute;left:50%;bottom:-6px;width:26px;height:12px;margin-left:-13px;border-radius:50%;background:var(--c);opacity:0;z-index:1}
+.om-pin.fresh .pulse{animation:pulse 2.2s ease-out infinite}
+.om-pin:hover .pulse{animation:pulse 1s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.4);opacity:.75}100%{transform:scale(2.6);opacity:0}}
+.om-pin .st{position:absolute;top:-6px;right:-6px;z-index:3;width:18px;height:18px;border-radius:50%;color:#fff;font:900 11px/18px 'Cairo';text-align:center;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.cap-pin{width:26px;height:26px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 0 0 3px var(--teal),0 4px 10px rgba(0,0,0,.3);display:grid;place-items:center;font-size:13px}
+.measure-pt{width:16px;height:16px;border-radius:50%;background:var(--modern);border:3px solid #fff;box-shadow:0 0 0 2px var(--modern)}
+.dist-label{background:var(--teal)!important;font-size:14px!important}
+
+/* Offline basemap labels */
+.map-label{white-space:nowrap;text-align:center;pointer-events:none;font-family:'Cairo';transform:translate(-50%,-50%);display:inline-block}
+.map-label.sea{color:#3d7da3;font-style:italic;font-weight:700;font-size:15px;letter-spacing:.5px;opacity:.85}
+.map-label.strait{color:#3d7da3;font-weight:700;font-size:12px}
+.map-label.country{color:#8f8676;font-weight:800;font-size:14px;letter-spacing:1px;opacity:.85}
+.map-label.desert{color:#b48a5a;font-weight:800;font-size:13px;opacity:.85}
+.map-label.oman{color:var(--teal);font-weight:900;font-size:18px;opacity:.35}
+.coords{background:rgba(255,255,255,.88);border-radius:8px;padding:3px 8px;font:700 12px 'Cairo';color:var(--teal);direction:ltr;box-shadow:0 1px 6px rgba(0,0,0,.12)}
+
+/* ---------- Popup ---------- */
+.pop{font-family:'Cairo',sans-serif}
+.pop .band{padding:14px 16px 12px;color:#fff;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 65%,#1D3557));position:relative}
+.pop .band .cat{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);border-radius:999px;padding:1px 10px;font-size:11.5px;font-weight:700}
+.pop .band .cat svg{width:13px;height:13px}
+.pop .band h3{margin:6px 0 0;font-size:19px;font-weight:900;line-height:1.3}
+.pop .band .alt{font-size:12px;opacity:.85;font-weight:600}
+.pop .body{padding:12px 14px 14px}
+.pop .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.pop .tag{background:var(--sand-l);color:#7a4f22;border-radius:8px;padding:2px 9px;font-size:12px;font-weight:700}
+.pop .tag.co{background:#eef4f9;color:var(--slate);direction:ltr}
+.pop .fact{background:#fffaf0;border:1px solid #f1dfb8;border-radius:12px;padding:9px 11px;font-size:13.5px;line-height:1.7;position:relative}
+.pop .fact .lbl{display:flex;align-items:center;gap:6px;font-weight:800;color:#a8741a;font-size:12.5px;margin-bottom:2px}
+.pop .speak{margin-inline-start:auto;border:0;background:#f6e7c6;color:#7a4f22;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800}
+.pop .speak.on{background:var(--gold);color:var(--teal)}
+.pop .go{margin-top:12px;width:100%;border:0;border-radius:12px;padding:10px;font-size:15px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--emerald),#137a53);box-shadow:0 4px 12px rgba(27,156,107,.35)}
+.pop .go:hover{filter:brightness(1.08)}
+.pop .go.done{background:linear-gradient(135deg,var(--slate),var(--teal));box-shadow:none}
+
+/* ---------- Modals ---------- */
+.overlay{position:fixed;inset:0;background:rgba(15,28,46,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:3000;padding:16px}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:22px;max-width:560px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:rise .3s ease}
+.modal .mh{padding:16px 20px;color:#fff;background:linear-gradient(135deg,var(--c,var(--teal)),color-mix(in srgb,var(--c,var(--teal)) 60%,#0f1c2e));display:flex;align-items:center;gap:10px}
+.modal .mh h3{margin:0;font-size:18px;font-weight:900}
+.modal .mh small{display:block;font-size:12px;opacity:.85;font-weight:600}
+.modal .mh .x{margin-inline-start:auto;border:0;background:rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px}
+.modal .mb{padding:18px 20px 20px}
+.q-text{font-size:19px;font-weight:800;line-height:1.6;margin:0 0 14px;color:var(--teal)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:start;border:2px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font-size:16px;font-weight:700;color:var(--ink);transition:.15s}
+.opt .k{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--sand-l);color:#7a4f22;font-weight:900}
+.opt:hover:not([disabled]){border-color:var(--slate);transform:translateY(-1px);box-shadow:0 4px 12px rgba(69,123,157,.15)}
+.opt[disabled]{cursor:default}
+.opt.correct{border-color:var(--ok);background:#e8f7ef;color:#11663f}.opt.correct .k{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:#fdecec;color:#9b2222}.opt.wrong .k{background:var(--bad);color:#fff}
+.opt.dim{opacity:.55}
+.feedback{margin-top:14px;border-radius:14px;padding:12px 14px;font-weight:700;font-size:15px;display:none;line-height:1.6}
+.feedback.show{display:block;animation:rise .3s}
+.feedback.ok{background:#e8f7ef;color:#11663f;border:1px solid #bfe8d1}
+.feedback.no{background:#fff4e5;color:#8a4b00;border:1px solid #f5d6a8}
+.m-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:10px 16px;font-weight:800;font-size:15px;background:var(--teal);color:#fff;display:inline-flex;align-items:center;gap:6px}
+.btn.alt{background:var(--sand-l);color:var(--teal)}
+.btn.gold{background:var(--gold);color:var(--teal)}
+.btn.red{background:var(--bad)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.field{display:grid;gap:6px;margin-bottom:12px;font-weight:700;font-size:14px;color:var(--teal)}
+.field input{border:2px solid var(--line);border-radius:12px;padding:10px 12px;font:600 16px 'Cairo';color:var(--ink)}
+#certCanvas{width:100%;height:auto;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.15);display:block}
+.modal.wide{max-width:860px}
+
+/* Toasts & confetti */
+#toasts{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);z-index:4000;display:grid;gap:8px;pointer-events:none;width:min(92vw,440px)}
+.toast{background:var(--teal);color:#fff;border-radius:14px;padding:10px 14px;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;gap:10px;align-items:center;animation:toastIn .35s ease;border-inline-start:5px solid var(--gold)}
+.toast .em{font-size:24px}
+@keyframes toastIn{from{opacity:0;transform:translateY(-12px) scale(.96)}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:3500}
+
+/* Mobile drawer */
+.fab{display:none}
+@media (max-width:900px){
+  :root{--head-h:58px}
+  .app{grid-template-columns:1fr}
+  aside{position:fixed;inset-inline:0;bottom:0;top:auto;height:62vh;z-index:1050;border-radius:22px 22px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.2);
+    transform:translateY(105%);transition:transform .35s ease;border:0;padding-top:24px}
+  aside::before{content:"";position:absolute;top:8px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:9px;background:#d8ccb9}
+  aside.open{transform:none}
+  #mapWrap{height:100%}
+  .fab{display:flex;position:fixed;bottom:18px;inset-inline-start:50%;transform:translateX(50%);z-index:1060;border:0;background:var(--teal);color:#fff;
+    padding:12px 20px;border-radius:999px;font-weight:800;font-size:15px;box-shadow:0 8px 20px rgba(29,53,87,.4);gap:8px;align-items:center}
+  [dir="ltr"] .fab{transform:translateX(-50%)}
+  .brand small,.hide-sm{display:none}
+  .brand h1{font-size:16px}
+  .head-btn{padding:6px 8px}
+  .stat-pill{padding:4px 9px;font-size:13px}
+  .leaflet-popup-content{width:270px}
+}
+@media (max-width:520px){ .head-btn .lbl{display:none} .stat-pill .lbl{display:none} .brand h1{display:none} .head-stats{gap:6px} }
+
+/* Print: only the certificate */
+@media print{
+  body *{visibility:hidden}
+  #printCert,#printCert *{visibility:visible}
+  #printCert{position:fixed;inset:0;display:block!important}
+  #printCert img{width:100%}
+  @page{size:landscape;margin:8mm}
+}
+#printCert{display:none}
+</style>
+</head>
+<body>
+
+<!-- =================== HEADER =================== -->
+<header>
+  <div class="brand">
+    <svg class="brand-logo" viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="22" fill="#E3B23C"/><circle cx="24" cy="24" r="17" fill="#1D3557"/>
+      <path d="M24 9l3.2 9.3 9.8.2-7.8 5.9 2.8 9.4L24 28.2l-8 5.6 2.8-9.4-7.8-5.9 9.8-.2z" fill="#D4A373"/>
+      <circle cx="24" cy="23" r="3.2" fill="#fff"/>
+    </svg>
+    <div><h1 data-i18n="title"></h1><small data-i18n="subtitle"></small></div>
+  </div>
+  <div class="head-stats">
+    <div class="stat-pill" id="scorePill">⭐ <span class="lbl" data-i18n="score"></span> <b id="scoreVal">0</b></div>
+    <div class="stat-pill hide-sm">🧭 <span class="lbl" data-i18n="explored"></span> <b id="exploredVal">0/33</b></div>
+    <button class="head-btn gold" id="certBtn" title="">🎓 <span class="lbl" data-i18n="certificate"></span></button>
+    <button class="head-btn" id="langBtn">🌐 <span id="langLbl">English</span></button>
+    <button class="head-btn" id="resetBtn">↺ <span class="lbl" data-i18n="reset"></span></button>
+  </div>
+</header>
+
+<div class="app">
+  <!-- =================== SIDEBAR =================== -->
+  <aside id="side">
+    <div id="govCardHost"></div>
+
+    <section class="panel">
+      <h2>🗂️ <span data-i18n="categories"></span></h2>
+      <div class="cat-chips" id="catChips"></div>
+    </section>
+
+    <section class="panel">
+      <h2>🗺️ <span data-i18n="governorates"></span><span class="count" id="govCount"></span></h2>
+      <div class="gov-ribbon" id="govRibbon"></div>
+    </section>
+
+    <section class="panel">
+      <h2>🏅 <span data-i18n="badges"></span></h2>
+      <div class="badges" id="badges"></div>
+    </section>
+
+    <section class="panel">
+      <h2>🧰 <span data-i18n="tools"></span></h2>
+      <div class="tool-row">
+        <button class="tbtn" id="measureBtn">📏 <span data-i18n="measure"></span></button>
+        <button class="tbtn ghost" id="measureClear">✖ <span data-i18n="clear"></span></button>
+      </div>
+      <div class="measure-out" id="measureOut"></div>
+      <div class="basemaps" id="basemaps"></div>
+      <div class="note" id="baseNote"></div>
+    </section>
+
+    <section class="panel">
+      <h2>📍 <span data-i18n="landmarks"></span><span class="count" id="lmCount"></span></h2>
+      <div class="lm-list" id="lmList"></div>
+    </section>
+  </aside>
+
+  <main id="mapWrap"><div id="map" dir="ltr" role="application" aria-label="Map of Oman"></div></main>
+</div>
+
+<button class="fab" id="fab">☰ <span data-i18n="panel"></span></button>
+
+<!-- =================== QUIZ MODAL =================== -->
+<div class="overlay" id="quizOv" role="dialog" aria-modal="true">
+  <div class="modal" id="quizModal">
+    <div class="mh"><span style="font-size:28px">🧭</span><div><h3 id="qTitle"></h3><small id="qSub"></small></div><button class="x" data-close="quizOv" aria-label="close">✕</button></div>
+    <div class="mb">
+      <p class="q-text" id="qText"></p>
+      <div class="opts" id="qOpts"></div>
+      <div class="feedback" id="qFb"></div>
+      <div class="m-actions"><button class="btn" data-close="quizOv" id="qDone"></button></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CERTIFICATE MODAL =================== -->
+<div class="overlay" id="certOv" role="dialog" aria-modal="true">
+  <div class="modal wide" style="--c:#b8862a">
+    <div class="mh"><span style="font-size:28px">🎓</span><div><h3 data-i18n="certTitle"></h3><small data-i18n="certSub"></small></div><button class="x" data-close="certOv" aria-label="close">✕</button></div>
+    <div class="mb">
+      <label class="field"><span data-i18n="yourName"></span><input id="certName" maxlength="40" autocomplete="off"></label>
+      <canvas id="certCanvas" width="1600" height="1130"></canvas>
+      <div class="m-actions">
+        <button class="btn gold" id="certSave">⬇️ <span data-i18n="savePng"></span></button>
+        <button class="btn alt" id="certPrint">🖨️ <span data-i18n="print"></span></button>
+      </div>
+      <div class="note" id="certNote"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CONFIRM RESET =================== -->
+<div class="overlay" id="resetOv" role="dialog" aria-modal="true">
+  <div class="modal" style="max-width:420px;--c:#D64545">
+    <div class="mh"><span style="font-size:26px">↺</span><h3 data-i18n="resetTitle"></h3></div>
+    <div class="mb"><p data-i18n="resetMsg" style="margin:0;line-height:1.7"></p>
+      <div class="m-actions"><button class="btn red" id="resetYes" data-i18n="resetYes"></button><button class="btn alt" data-close="resetOv" data-i18n="cancel"></button></div>
+    </div>
+  </div>
+</div>
+
+<div id="printCert"><img id="printImg" alt=""></div>
+<div id="toasts" aria-live="polite"></div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* =====================================================================
+   1) DATASET — 33 landmarks across the 11 governorates (verbatim AR from
+      the reference report; EN translations added for the English view)
+   ===================================================================== */
+const LANDMARKS = [
+  { id:"om_01", name_ar:"قلعة مطرح", name_en:"Mutrah Fort", category:"تراث وتاريخ", governorate:"مسقط", wilayat:"مطرح", lat:23.6214, lng:58.5664,
+    hint:"شُيدت في القرن السادس عشر الميلادي فوق تلة صخرية لتطل بشموخ على ميناء مطرح وسوقها التاريخي العريق، وكانت خط الدفاع الأول للمدينة.",
+    quiz:{ question:"على أي معالم محافظة مسقط تطل قلعة مطرح التاريخية مباشرة؟", options:["ميناء مطرح وسوقها","مطار مسقط الدولي","جبل شمس"], answer:"ميناء مطرح وسوقها" },
+    en:{ wilayat:"Mutrah", hint:"Built in the 16th century on a rocky hill proudly overlooking Mutrah's port and historic souq, it was the city's first line of defence.",
+      question:"Which Muscat landmark does Mutrah Fort directly overlook?", options:["Mutrah Port and its souq","Muscat International Airport","Jebel Shams"] } },
+
+  { id:"om_02", name_ar:"كهف مجلس الجن", name_en:"Majlis Al Jinn Cave", category:"بيئة وطبيعة", governorate:"مسقط", wilayat:"قريات", lat:22.8806, lng:59.1053,
+    hint:"ثاني أضخم كهف جوفي في العالم، يقع في هضبة سلمى بولاية قريات، وتبلغ مساحته ما يعادل 5 ملاعب كرة قدم تقريباً.",
+    quiz:{ question:"في أي ولاية يقع كهف مجلس الجن الجيولوجي الشهير؟", options:["قريات","نزوى","صلالة"], answer:"قريات" },
+    en:{ wilayat:"Qurayyat", hint:"The world's second-largest underground cave chamber, on the Selma Plateau in Qurayyat — about the size of 5 football pitches.",
+      question:"In which wilayat is the famous Majlis Al Jinn Cave located?", options:["Qurayyat","Nizwa","Salalah"] } },
+
+  { id:"om_03", name_ar:"مطار مسقط الدولي", name_en:"Muscat International Airport", category:"تنمية حديثة ورؤية 2040", governorate:"مسقط", wilayat:"السيب", lat:23.5933, lng:58.2844,
+    hint:"البوابة الجوية العصرية لسلطنة عُمان، يجمع تصميمه المعماري بين الأصالة العُمانية والتقنيات الذكية، وحاز جوائز عالمية كأفضل مطار إقليمي.",
+    quiz:{ question:"ما هي الولاية التي يقع فيها مبنى مطار مسقط الدولي؟", options:["السيب","بوشر","العامرات"], answer:"السيب" },
+    en:{ wilayat:"Seeb", hint:"Oman's modern air gateway; its design blends Omani heritage with smart technology, and it has won global awards as a top regional airport.",
+      question:"In which wilayat is the Muscat International Airport terminal located?", options:["Seeb","Bawshar","Al Amerat"] } },
+
+  { id:"om_04", name_ar:"قلعة خصب", name_en:"Khasab Castle", category:"تراث وتاريخ", governorate:"مسندم", wilayat:"خصب", lat:26.1983, lng:56.2494,
+    hint:"قلعة تاريخية شُيدت في القرن السابع عشر لحماية ممر مضيق هرمز المائي، وتحتضن اليوم متحفاً تراثياً يعرض قوارب الكمزاري ونماذج بيوت القفل.",
+    quiz:{ question:"تتميز قلعة خصب بإشرافها التاريخي على حماية أي ممر مائي دولي؟", options:["مضيق هرمز","مضيق باب المندب","قناة السويس"], answer:"مضيق هرمز" },
+    en:{ wilayat:"Khasab", hint:"A 17th-century castle built to guard the Strait of Hormuz; today it houses a heritage museum with Kumzari boats and 'Bait Al Qufl' house models.",
+      question:"Which international waterway did Khasab Castle historically help protect?", options:["Strait of Hormuz","Bab el-Mandeb Strait","Suez Canal"] } },
+
+  { id:"om_05", name_ar:"خور الشم ومضيق هرمز", name_en:"Khor Sham & Strait of Hormuz", category:"بيئة وطبيعة", governorate:"مسندم", wilayat:"خصب", lat:26.2167, lng:56.3500,
+    hint:"أخدود بحري خلاب تحيطه جبال شاهقة تغوص في البحر يُعرف بـ (فيوردات العرب)، وتعيش في مياهه الهادئة الدلافين البرية المبهجة.",
+    quiz:{ question:"بماذا تُلقب الأخوار البحرية الطبيعية الفريدة في محافظة مسندم كخور الشم؟", options:["فيوردات العرب","أهرامات الصحراء","وادي الرمال"], answer:"فيوردات العرب" },
+    en:{ wilayat:"Khasab", hint:"A stunning sea inlet ringed by towering mountains plunging into the water — known as the 'Fjords of Arabia', home to playful wild dolphins.",
+      question:"What nickname is given to Musandam's unique sea inlets such as Khor Sham?", options:["Fjords of Arabia","Pyramids of the Desert","Valley of Sands"] } },
+
+  { id:"om_06", name_ar:"ميناء خصب", name_en:"Port of Khasab", category:"تنمية حديثة ورؤية 2040", governorate:"مسندم", wilayat:"خصب", lat:26.2089, lng:56.2483,
+    hint:"شريان اقتصادي وتجاري وسياحي استراتيجي يربط شمال السلطنة بالخطوط البحرية الإقليمية، ويستقبل السفن السياحية والعبّارات السريعة الحديثة.",
+    quiz:{ question:"ما الدور التنموي الأبرز لميناء خصب في محافظة مسندم؟", options:["تنشيط التجارة الإقليمية واستقبال العبارات والسياح","تعدين الذهب الخام","زراعة القمح المروي"], answer:"تنشيط التجارة الإقليمية واستقبال العبارات والسياح" },
+    en:{ wilayat:"Khasab", hint:"A strategic economic, trade and tourism artery linking northern Oman to regional sea routes, welcoming cruise ships and modern fast ferries.",
+      question:"What is the main development role of Khasab Port in Musandam?", options:["Boosting regional trade and receiving ferries and tourists","Mining raw gold","Growing irrigated wheat"] } },
+
+  { id:"om_07", name_ar:"حصن الخندق", name_en:"Al Khandaq Fort", category:"تراث وتاريخ", governorate:"البريمي", wilayat:"البريمي", lat:24.2436, lng:55.7733,
+    hint:"حصن أثري منيع سُمي بالخندق نسبة لوجود خندق مائي عريض يحيط به كإجراء دفاعي فريد كان يملأ بالماء لمنع المهاجمين.",
+    quiz:{ question:"ما السمة الدفاعية الفريدة التي استمد منها حصن الخندق اسمه؟", options:["خندق مائي عميق يحيط به","برج مراقبة خشبي معلق","جدران مصنوعة من الفولاذ"], answer:"خندق مائي عميق يحيط به" },
+    en:{ wilayat:"Al Buraimi", hint:"A mighty fort named after the wide moat (khandaq) around it — a unique defence once filled with water to stop attackers.",
+      question:"Which unique defensive feature gave Al Khandaq Fort its name?", options:["A deep water moat surrounding it","A hanging wooden watchtower","Walls made of steel"] } },
+
+  { id:"om_08", name_ar:"واحة وادي شرم", name_en:"Wadi Sharm Oasis", category:"بيئة وطبيعة", governorate:"البريمي", wilayat:"محضة", lat:24.4833, lng:55.9500,
+    hint:"واحة جبلية خضراء بين التكوينات الصخرية الصامتة، تتدفق فيها المياه العذبة وتحيط بها بساتين النخيل الوارفة، مما يجعلها ملاذاً بيئياً ساحراً.",
+    quiz:{ question:"في أي ولاية تقع واحة وادي شرم بمحافظة البريمي؟", options:["محضة","السنينة","ضنك"], answer:"محضة" },
+    en:{ wilayat:"Mahdah", hint:"A green mountain oasis among silent rock formations, with flowing fresh water and lush palm groves — a charming natural retreat.",
+      question:"In which wilayat of Al Buraimi is Wadi Sharm Oasis located?", options:["Mahdah","As Sunaynah","Dhank"] } },
+
+  { id:"om_09", name_ar:"مدينة البريمي الصناعية (مدائن)", name_en:"Al Buraimi Industrial City (Madayn)", category:"تنمية حديثة ورؤية 2040", governorate:"البريمي", wilayat:"البريمي", lat:24.2250, lng:55.8333,
+    hint:"مركز صناعي ولوجستي متطور يُسهم في تعزيز التجارة العابرة للحدود وتوطين الصناعات التحويلية الخفيفة والمتوسطة ضمن أهداف رؤية عُمان 2040.",
+    quiz:{ question:"ما الهدف الأساسي لتطوير مدينة البريمي الصناعية ضمن رؤية 2040؟", options:["دعم الصناعات الوطنية وتنشيط التجارة الحدودية","بناء مراصد فلكية عملاقة","توليد الطاقة النووية"], answer:"دعم الصناعات الوطنية وتنشيط التجارة الحدودية" },
+    en:{ wilayat:"Al Buraimi", hint:"An advanced industrial and logistics hub boosting cross-border trade and localising light and medium manufacturing under Oman Vision 2040.",
+      question:"What is the main goal of developing Al Buraimi Industrial City under Vision 2040?", options:["Supporting national industries and border trade","Building giant observatories","Generating nuclear power"] } },
+
+  { id:"om_10", name_ar:"قلعة صحار", name_en:"Sohar Fort", category:"تراث وتاريخ", governorate:"شمال الباطنة", wilayat:"صحار", lat:24.3644, lng:56.7458,
+    hint:"قلعة تاريخية مهيبة شُيدت في القرنين الثالث عشر والرابع عشر، تضم نفقاً سرياً ومتحفاً يوثق الملاحة البحرية لصحار عاصمة عُمان القديمة.",
+    quiz:{ question:"ماذا يوثق المتحف الداخلي لقلعة صحار التاريخية؟", options:["تاريخ التجارة والملاحة البحرية العُمانية","أنواع الزواحف الصحراوية","تاريخ صناعة الطائرات"], answer:"تاريخ التجارة والملاحة البحرية العُمانية" },
+    en:{ wilayat:"Sohar", hint:"A majestic fort from the 13th–14th centuries with a secret tunnel and a museum on the seafaring history of Sohar, Oman's ancient capital.",
+      question:"What does the museum inside historic Sohar Fort document?", options:["Omani trade and seafaring history","Types of desert reptiles","The history of aircraft making"] } },
+
+  { id:"om_11", name_ar:"وادي الجزي", name_en:"Wadi Al Jizi", category:"بيئة وطبيعة", governorate:"شمال الباطنة", wilayat:"صحار", lat:24.2986, lng:56.5167,
+    hint:"أحد أعظم أودية جبال الحجر الغربي، شكّل تاريخياً معبراً تجارياً لقوافل النحاس القديم بين صحار والواحات الداخلية، ويتميز بتنوعه الجيولوجي النادر.",
+    quiz:{ question:"ما المعدن القديم الذي اشتهر وادي الجزي بنقله وتعدينه منذ آلاف السنين في مجان؟", options:["النحاس","الفضة","القصدير"], answer:"النحاس" },
+    en:{ wilayat:"Sohar", hint:"One of the great valleys of the Western Hajar; historically a trade route for ancient copper caravans between Sohar and the inland oases.",
+      question:"Which ancient metal was Wadi Al Jizi famous for mining and transporting in ancient Magan?", options:["Copper","Silver","Tin"] } },
+
+  { id:"om_12", name_ar:"ميناء صحار والمنطقة الحرة", name_en:"Port of Sohar & Freezone", category:"تنمية حديثة ورؤية 2040", governorate:"شمال الباطنة", wilayat:"صحار", lat:24.4983, lng:56.6289,
+    hint:"أحد أسرع الموانئ نمواً في العالم، يُعد مركزاً صناعياً ولوجستياً عالمياً يضم صناعات بتروكيماوية ومعادن ومجمعاً غذائياً عملاقاً للمخزون الاستراتيجي.",
+    quiz:{ question:"ما الموقع الاستراتيجي لميناء صحار والمنطقة الحرة؟", options:["خارج مضيق هرمز على بحر عُمان","على الخليج العربي","على البحر الأحمر"], answer:"خارج مضيق هرمز على بحر عُمان" },
+    en:{ wilayat:"Sohar", hint:"One of the world's fastest-growing ports — a global industrial and logistics hub with petrochemicals, metals and a giant strategic food cluster.",
+      question:"What is the strategic location of Sohar Port and Freezone?", options:["Outside the Strait of Hormuz on the Sea of Oman","On the Arabian Gulf","On the Red Sea"] } },
+
+  { id:"om_13", name_ar:"قلعة الرستاق", name_en:"Rustaq Fort", category:"تراث وتاريخ", governorate:"جنوب الباطنة", wilayat:"الرستاق", lat:23.3917, lng:57.4264,
+    hint:"قلعة ضخمة بنيت قبل الإسلام وجُددت عبر العصور، كانت عاصمة لدولة اليعاربة ودولة البوسعيد، وتحتوي على أربعة أبراج أشهرها البرج الأحمر.",
+    quiz:{ question:"أي العصور العُمانية اتخذت من قلعة الرستاق عاصمة تاريخية لها؟", options:["دولة اليعاربة والبدايات البوسعيدية","الدولة الأموية فقط","الدولة العباسية فقط"], answer:"دولة اليعاربة والبدايات البوسعيدية" },
+    en:{ wilayat:"Rustaq", hint:"A huge pre-Islamic fort renovated through the ages; capital of the Ya'aruba and Al Busaidi states, with four towers — the Red Tower is the most famous.",
+      question:"Which Omani eras used Rustaq Fort as a historic capital?", options:["The Ya'aruba state and early Al Busaidi era","The Umayyad state only","The Abbasid state only"] } },
+
+  { id:"om_14", name_ar:"محمية جزر الديمانيات الطبيعية", name_en:"Daymaniyat Islands Nature Reserve", category:"بيئة وطبيعة", governorate:"جنوب الباطنة", wilayat:"بركاء", lat:23.8569, lng:58.0906,
+    hint:"أرخبيل بحري يضم 9 جزر بكر، يُصنف كأهم ملاذ لتعشيش سلاحف الشرفاف النادرة، وموطن لأندر الشعاب المرجانية والطيور المهاجرة في عُمان.",
+    quiz:{ question:"ما الكائن البحري المهدد بالانقراض الذي تُعد جزر الديمانيات أهم موقع لتعشيشه في عُمان؟", options:["سلحفاة الشرفاف صقرية المنقار","فقمة الراهب","الحوت الأزرق"], answer:"سلحفاة الشرفاف صقرية المنقار" },
+    en:{ wilayat:"Barka", hint:"An archipelago of 9 pristine islands — the key nesting refuge for rare hawksbill turtles, with rare coral reefs and migratory birds.",
+      question:"Which endangered sea creature uses the Daymaniyat Islands as its most important nesting site in Oman?", options:["Hawksbill sea turtle","Monk seal","Blue whale"] } },
+
+  { id:"om_15", name_ar:"مدينة خزائن الاقتصادية", name_en:"Khazaen Economic City", category:"تنمية حديثة ورؤية 2040", governorate:"جنوب الباطنة", wilayat:"بركاء", lat:23.6333, lng:57.8667,
+    hint:"مدينة اقتصادية لوجستية متكاملة تحتضن أول ميناء بري في عُمان، وسوقاً مركزياً حديثاً للخضار والفواكه، وربطاً استراتيجياً متكاملاً بين العاصمة والمحافظات.",
+    quiz:{ question:"ما المرفق اللوجستي الأول من نوعه في سلطنة عُمان الذي تحتضنه مدينة خزائن؟", options:["أول ميناء بري (Dry Port)","أول مطار مائي","أول سكة حديد قطبية"], answer:"أول ميناء بري (Dry Port)" },
+    en:{ wilayat:"Barka", hint:"An integrated logistics city with Oman's first dry port and a modern central fruit and vegetable market, linking the capital to the governorates.",
+      question:"Which first-of-its-kind logistics facility in Oman is located in Khazaen City?", options:["The first Dry Port","The first water airport","The first polar railway"] } },
+
+  { id:"om_16", name_ar:"قلعة بهلاء وسورها الأثري", name_en:"Bahla Fort & Oasis", category:"تراث وتاريخ", governorate:"الداخلية", wilayat:"بهلاء", lat:22.9644, lng:57.3000,
+    hint:"أول موقع أثري عُماني يُدرج في قائمة التراث العالمي لليونسكو عام 1987، وتتميز بسورها الدفاعي الطيني الضخم الممتد لأكثر من 12 كيلومتراً.",
+    quiz:{ question:"في أي عام تم إدراج قلعة بهلاء كأول موقع عُماني في قائمة اليونسكو للتراث العالمي؟", options:["1987م","2018م","2000م"], answer:"1987م" },
+    en:{ wilayat:"Bahla", hint:"Oman's first site on the UNESCO World Heritage List (1987), famous for its huge mud-brick defensive wall stretching over 12 km.",
+      question:"In which year was Bahla Fort inscribed as Oman's first UNESCO World Heritage Site?", options:["1987","2018","2000"] } },
+
+  { id:"om_17", name_ar:"جبل شمس", name_en:"Jebel Shams", category:"بيئة وطبيعة", governorate:"الداخلية", wilayat:"الحمراء", lat:23.2375, lng:57.1490,
+    hint:"أعلى قمة جبلية في سلطنة عُمان وشبه الجزيرة العربية بارتفاع يفوق 3,000 متر فوق مستوى سطح البحر، ويضم الخانق العظيم (جراند كانيون العرب).",
+    quiz:{ question:"ما اللقب الجيولوجي الشهير الذي يطلق على الصدع العميق في جبل شمس؟", options:["الخانق العظيم (جراند كانيون عُمان)","الوادي الملون","الأخدود الإفريقي"], answer:"الخانق العظيم (جراند كانيون عُمان)" },
+    en:{ wilayat:"Al Hamra", hint:"The highest peak in Oman and eastern Arabia at over 3,000 m above sea level, home to the 'Grand Canyon of Arabia'.",
+      question:"What famous nickname is given to the deep gorge at Jebel Shams?", options:["The Grand Canyon of Oman","The Coloured Canyon","The African Rift"] } },
+
+  { id:"om_18", name_ar:"مشروع محطة منح للطاقة الشمسية", name_en:"Manah Solar Power IPP (Manah 1 & 2)", category:"تنمية حديثة ورؤية 2040", governorate:"الداخلية", wilayat:"منح", lat:22.7833, lng:57.5833,
+    hint:"أكبر مجمع لإنتاج الكهرباء من الطاقة الشمسية الكهروضوئية في سلطنة عُمان بقدرة إجمالية تصل إلى 1,000 ميجاواط ضمن أهداف رؤية عُمان 2040.",
+    quiz:{ question:"ما القدرة الإنتاجية الإجمالية المخططة لمشروعي منح 1 ومنح 2 للطاقة الشمسية؟", options:["1,000 ميجاواط","100 ميجاواط","50 ميجاواط"], answer:"1,000 ميجاواط" },
+    en:{ wilayat:"Manah", hint:"Oman's largest solar PV power complex, with a total capacity of up to 1,000 MW — part of the Oman Vision 2040 goals.",
+      question:"What is the planned total capacity of the Manah 1 and Manah 2 solar projects?", options:["1,000 MW","100 MW","50 MW"] } },
+
+  { id:"om_19", name_ar:"مواقع بات والخطم والعين الأثرية", name_en:"Archaeological Sites of Bat, Al-Khutm and Al-Ayn", category:"تراث وتاريخ", governorate:"الظاهرة", wilayat:"عبري", lat:23.2700, lng:56.7450,
+    hint:"مدافن أثرية بارزة من الألفية الثالثة قبل الميلاد مدرجة في قائمة اليونسكو للتراث العالمي، تشتهر بقبور (خلايا النحل) وقبور حضارة أم النار العريقة.",
+    quiz:{ question:"ما الشكل الهندسي التراثي المميز لمدافن الألفية الثالثة ق.م في موقع بات الأثري؟", options:["قبور خلايا النحل المقببة","أهرامات مدرجة","كهوف أفقية مائية"], answer:"قبور خلايا النحل المقببة" },
+    en:{ wilayat:"Ibri", hint:"Remarkable 3rd-millennium BCE tombs on the UNESCO World Heritage List, famous for 'beehive' tombs and the ancient Umm an-Nar culture.",
+      question:"What is the distinctive shape of the 3rd-millennium BCE tombs at Bat?", options:["Domed beehive tombs","Stepped pyramids","Horizontal water caves"] } },
+
+  { id:"om_20", name_ar:"وادي ضم وجبل مشت", name_en:"Wadi Damm & Jebel Misht", category:"بيئة وطبيعة", governorate:"الظاهرة", wilayat:"عبري", lat:23.2667, lng:57.0667,
+    hint:"أعجوبة جيولوجية تضم برَكاً صخرية مائية بديعة بين جدران كلسية بيضاء، وتجاور جبل مشت المشهور بجرفه العمودي الأطول في شبه الجزيرة لهواة التسلق.",
+    quiz:{ question:"بماذا يشتهر جبل مشت الواقع قرب وادي ضم في محافظة الظاهرة؟", options:["بجرفه الصخري الشاهق المناسب للتسلق الجبلي","بقمته البركانية النشطة","بغاباته الاستوائية المطرية"], answer:"بجرفه الصخري الشاهق المناسب للتسلق الجبلي" },
+    en:{ wilayat:"Ibri", hint:"A geological wonder of rock pools between white limestone walls, next to Jebel Misht — famous for the longest vertical cliff in Arabia for climbers.",
+      question:"What is Jebel Misht, near Wadi Damm, famous for?", options:["Its towering rock cliff, ideal for climbing","Its active volcanic peak","Its tropical rainforests"] } },
+
+  { id:"om_21", name_ar:"محطة عبري للطاقة الشمسية", name_en:"Ibri Solar IPP", category:"تنمية حديثة ورؤية 2040", governorate:"الظاهرة", wilayat:"عبري", lat:23.2833, lng:56.5000,
+    hint:"أول محطة كبرى للطاقة الشمسية مرتبطة بالشبكة في عُمان بقدرة 500 ميجاواط، تضم 1.5 مليون لوح شمسي ثنائي الوجه وتحد من انبعاثات الكربون.",
+    quiz:{ question:"كم عدد الألواح الشمسية المستخدمة تقريباً في محطة عبري للطاقة الشمسية؟", options:["حوالي 1.5 مليون لوح شمسي","100 ألف لوح فقط","10 آلاف لوح"], answer:"حوالي 1.5 مليون لوح شمسي" },
+    en:{ wilayat:"Ibri", hint:"Oman's first large grid-connected solar plant (500 MW), with 1.5 million bifacial solar panels that help cut carbon emissions.",
+      question:"Roughly how many solar panels are used at the Ibri solar plant?", options:["About 1.5 million panels","Only 100,000 panels","10,000 panels"] } },
+
+  { id:"om_22", name_ar:"حصن المنترب", name_en:"Al Mintarib Fort", category:"تراث وتاريخ", governorate:"شمال الشرقية", wilayat:"بدية", lat:22.4333, lng:58.8000,
+    hint:"حصن تاريخي يعود إلى القرن الثالث عشر الميلادي، بُني لحماية واحة بدية الزراعية وبوابة رمال الشرقية وتأمين طرق القوافل التاريخية.",
+    quiz:{ question:"يقع حصن المنترب التاريخي كحارس لبوابة أي بيئة طبيعية شهيرة؟", options:["رمال الشرقية (بدية)","مضيق هرمز","جزر الديمانيات"], answer:"رمال الشرقية (بدية)" },
+    en:{ wilayat:"Bidiyah", hint:"A 13th-century fort built to protect the Bidiyah farming oasis and the gateway to the Sharqiyah Sands, securing historic caravan routes.",
+      question:"Al Mintarib Fort stands guard at the gateway to which famous natural environment?", options:["Sharqiyah Sands (Bidiyah)","Strait of Hormuz","Daymaniyat Islands"] } },
+
+  { id:"om_23", name_ar:"رمال الشرقية (رمال آل وهيبة)", name_en:"Sharqiyah Sands", category:"بيئة وطبيعة", governorate:"شمال الشرقية", wilayat:"بدية", lat:22.2500, lng:58.8500,
+    hint:"بحر من الرمال الذهبية والكثبان الطولية يصل ارتفاعها إلى 100 متر، وتعد مختبراً طبيعياً نادراً لدراسة النظم الإيكولوجية الصحراوية وتراث البادية.",
+    quiz:{ question:"ما هي الظاهرة التضاريسية المميزة لرمال الشرقية التي تجذب الزوار وعلماء البيئة؟", options:["الكثبان الرملية الطولية الشاهقة","البراكين الطينية","الأنهار الجليدية"], answer:"الكثبان الرملية الطولية الشاهقة" },
+    en:{ wilayat:"Bidiyah", hint:"A sea of golden sand with linear dunes up to 100 m high — a rare natural lab for studying desert ecosystems and Bedouin heritage.",
+      question:"Which landform of the Sharqiyah Sands attracts visitors and environmental scientists?", options:["Towering linear sand dunes","Mud volcanoes","Glaciers"] } },
+
+  { id:"om_24", name_ar:"وادي بني خالد", name_en:"Wadi Bani Khalid", category:"بيئة وطبيعة", governorate:"شمال الشرقية", wilayat:"وادي بني خالد", lat:22.5833, lng:59.0833,
+    hint:"أحد أشهر أودية عُمان الطبيعية التي تتدفق بها المياه العذبة الرقراقة على مدار العام دون انقطاع، محتضناً بركاً فيروزية وكهف مقل العجيب.",
+    quiz:{ question:"ما الميزة الطبيعية النادرة التي ينفرد بها وادي بني خالد عن معظم أودية الجزيرة العربية؟", options:["جريان المياه والبرك العذبة طوال العام","خلوه التام من النباتات","تجمده بالكامل في الصيف"], answer:"جريان المياه والبرك العذبة طوال العام" },
+    en:{ wilayat:"Wadi Bani Khalid", hint:"One of Oman's most famous wadis, with clear fresh water flowing all year round, turquoise pools and the amazing Muqal Cave.",
+      question:"What rare natural feature makes Wadi Bani Khalid different from most Arabian wadis?", options:["Fresh water and pools all year round","No plants at all","Freezing completely in summer"] } },
+
+  { id:"om_25", name_ar:"مدينة قلهات التاريخية", name_en:"Ancient City of Qalhat", category:"تراث وتاريخ", governorate:"جنوب الشرقية", wilayat:"صور", lat:22.7000, lng:59.3667,
+    hint:"موقع مدرج في قائمة اليونسكو للتراث العالمي، كان ميناءً دولياً بارزاً في العصور الوسطى زاره الرحالة ماركو بولو وابن بطوطة، ويشتهر بضريح بيبي مريم.",
+    quiz:{ question:"ما هو أبرز معلم معماري باقٍ وشاهد على عظمة مدينة قلهات التاريخية؟", options:["ضريح بيبي مريم","برج إيفل","مسجد قباء"], answer:"ضريح بيبي مريم" },
+    en:{ wilayat:"Sur", hint:"A UNESCO World Heritage Site and major medieval port visited by Marco Polo and Ibn Battuta, famous for the Bibi Maryam Mausoleum.",
+      question:"Which surviving monument best shows the greatness of ancient Qalhat?", options:["Bibi Maryam Mausoleum","The Eiffel Tower","Quba Mosque"] } },
+
+  { id:"om_26", name_ar:"محمية رأس الجنز للسلاحف", name_en:"Ras Al Jinz Turtle Reserve", category:"بيئة وطبيعة", governorate:"جنوب الشرقية", wilayat:"صور", lat:22.4286, lng:59.8317,
+    hint:"أقصى نقطة في شرق شبه الجزيرة العربية ومحمية بيئية عالمية تفد إليها آلاف السلاحف الخضراء سنوياً لوضع بيوضها على شواطئها الذهبية الآمنة.",
+    quiz:{ question:"ما نوع السلاحف البحرية الأكثر شهرة التي تضع بيوضها بكثافة في محمية رأس الجنز؟", options:["السلحفاة الخضراء","سلحفاة المحيط الجلدية","سلحفاة غالاباغوس"], answer:"السلحفاة الخضراء" },
+    en:{ wilayat:"Sur", hint:"The easternmost point of the Arabian Peninsula and a global reserve where thousands of green turtles nest every year on safe golden beaches.",
+      question:"Which sea turtle species is famous for nesting in large numbers at Ras Al Jinz?", options:["Green turtle","Leatherback turtle","Galápagos tortoise"] } },
+
+  { id:"om_27", name_ar:"مجمع عُمان للغاز الطبيعي المسال ومصنع السفن", name_en:"Oman LNG Complex & Sur Historic Shipyards", category:"تنمية حديثة ورؤية 2040", governorate:"جنوب الشرقية", wilayat:"صور", lat:22.6500, lng:59.4000,
+    hint:"صرح صناعي متطور لتصدير الغاز المسال للعالم، يتكامل مع إرث صور العريق في صناعة سفن الغنجة والبغلة التي جابت المحيط الهندي.",
+    quiz:{ question:"ما هي السلعة الاستراتيجية النظيفة التي يقوم مجمع قلهات في ولاية صور بإسالتها وتصديرها عالمياً؟", options:["الغاز الطبيعي المسال (LNG)","الفحم الحجري","خام الحديد الفوسفاتي"], answer:"الغاز الطبيعي المسال (LNG)" },
+    en:{ wilayat:"Sur", hint:"An advanced industrial complex exporting liquefied gas worldwide, alongside Sur's proud tradition of building Ghanjah and Baghlah ships that sailed the Indian Ocean.",
+      question:"Which clean strategic product does the Qalhat complex in Sur liquefy and export?", options:["Liquefied natural gas (LNG)","Coal","Phosphate iron ore"] } },
+
+  { id:"om_28", name_ar:"محمية المها العربية", name_en:"Arabian Oryx Reserve", category:"بيئة وطبيعة", governorate:"الوسطى", wilayat:"هيماء", lat:19.9500, lng:57.1000,
+    hint:"محمية طبيعية مترامية الأطراف في سهل الجدة، تُمثل الموطن الطبيعي لإعادة توطين المها العربي (ابن سولع) والوعل النوبي والغزال العربي النادر.",
+    quiz:{ question:"ما الحيوان النادر ذو القرنين المستقيمين الذي تهدف المحمية في هيماء لحمايته وإكثاره؟", options:["المها العربي","المها الأفريقي","دب الباندا"], answer:"المها العربي" },
+    en:{ wilayat:"Haima", hint:"A vast reserve on the Jiddat al-Harasis plain where the Arabian oryx, Nubian ibex and rare Arabian gazelle are being returned to the wild.",
+      question:"Which rare animal with long straight horns does the Haima reserve protect and breed?", options:["Arabian oryx","African oryx","Panda bear"] } },
+
+  { id:"om_29", name_ar:"حديقة الصخور بالدقم", name_en:"Duqm Rock Garden", category:"بيئة وطبيعة", governorate:"الوسطى", wilayat:"الدقم", lat:19.6700, lng:57.6900,
+    hint:"موقع جيولوجي ساحر يمتد على مساحة 6 كيلومترات مربعة، يضم مجسمات صخرية كلسية نحتتها عوامل الرياح والمياه عبر 46 مليون عام.",
+    quiz:{ question:"كيف تشكلت المنحوتات الطبيعية الرائعة في حديقة الصخور بولاية الدقم؟", options:["بفعل التعرية الطبيعية بالرياح والمياه عبر ملايين السنين","بواسطة آلات نحت صناعية","نتيجة انفجار بركاني حديث"], answer:"بفعل التعرية الطبيعية بالرياح والمياه عبر ملايين السنين" },
+    en:{ wilayat:"Duqm", hint:"A magical 6 km² geological site of limestone rock sculptures carved by wind and water over 46 million years.",
+      question:"How were the amazing natural sculptures in Duqm Rock Garden formed?", options:["Natural erosion by wind and water over millions of years","By industrial carving machines","A recent volcanic eruption"] } },
+
+  { id:"om_30", name_ar:"ميناء الدقم والمنطقة الاقتصادية الخاصة (SEZAD)", name_en:"Port of Duqm & Special Economic Zone (SEZAD)", category:"تنمية حديثة ورؤية 2040", governorate:"الوسطى", wilayat:"الدقم", lat:19.6686, lng:57.7000,
+    hint:"أكبر منطقة اقتصادية خاصة في الشرق الأوسط، تضم ميناءً بحرياً عملاقاً، وحوضاً جافاً لإصلاح السفن، ومشاريع رائدة للهيدروجين الأخضر والطاقة النظيفة.",
+    quiz:{ question:"ما أكبر منشأة بحرية لإصلاح السفن العملاقة تتميز بها المنطقة الاقتصادية بالدقم؟", options:["الحوض الجاف (Oman Drydock)","مرسى زوارق صيد تقليدية فقط","مصنع الطائرات الشراعية"], answer:"الحوض الجاف (Oman Drydock)" },
+    en:{ wilayat:"Duqm", hint:"The largest special economic zone in the Middle East, with a giant seaport, a ship-repair dry dock and pioneering green hydrogen and clean-energy projects.",
+      question:"Which major facility for repairing giant ships is found in the Duqm economic zone?", options:["The dry dock (Oman Drydock)","Only a small fishing-boat harbour","A glider factory"] } },
+
+  { id:"om_31", name_ar:"منتزه البليد الأثري ومتحف أرض اللبان", name_en:"Al Baleed Archaeological Park & Museum of Frankincense", category:"تراث وتاريخ", governorate:"ظفار", wilayat:"صلالة", lat:17.0069, lng:54.1335,
+    hint:"أحد مواقع (أرض اللبان) المدرجة في اليونسكو، وكان ميناءً إسلامياً محصناً صدّر اللبان العربي إلى موانئ الصين والهند وروما عبر العصور.",
+    quiz:{ question:"ما هي السلعة العطرية التراثية الثمينة التي اشتهر ميناء البليد بتصديرها للعالم القديم؟", options:["اللبان الظفاري","الحرير الخام","الزعفران البري"], answer:"اللبان الظفاري" },
+    en:{ wilayat:"Salalah", hint:"Part of UNESCO's 'Land of Frankincense'; a fortified Islamic-era port that exported Arabian frankincense to China, India and Rome.",
+      question:"Which precious aromatic product was Al Baleed port famous for exporting?", options:["Dhofari frankincense","Raw silk","Wild saffron"] } },
+
+  { id:"om_32", name_ar:"وادي دربات ومحمية جبل سمحان", name_en:"Wadi Darbat & Jabal Samhan Reserve", category:"بيئة وطبيعة", governorate:"ظفار", wilayat:"طاقة", lat:17.1050, lng:54.4450,
+    hint:"جنة طبيعية تفيض بالشلالات والبحيرات خلال موسم الخريف، وتجاور جبل سمحان الذي يمثل الملاذ الآمن الأخير للنمر العربي النادر في الجزيرة العربية.",
+    quiz:{ question:"ما الحيوان المفترس النادر جداً الذي تُعد محمية جبل سمحان الطبيعية آخر معاقله الآمنة؟", options:["النمر العربي","الدب البني","النمر السيبيري"], answer:"النمر العربي" },
+    en:{ wilayat:"Taqah", hint:"A natural paradise of waterfalls and lakes in the Khareef season, next to Jabal Samhan — the last safe refuge of the rare Arabian leopard.",
+      question:"Which very rare predator has its last safe stronghold in the Jabal Samhan reserve?", options:["Arabian leopard","Brown bear","Siberian tiger"] } },
+
+  { id:"om_33", name_ar:"محطة ظفار لطاقة الرياح بهرويل", name_en:"Dhofar Wind Farm at Harweel", category:"تنمية حديثة ورؤية 2040", governorate:"ظفار", wilayat:"ثمريت", lat:17.6500, lng:54.0500,
+    hint:"أول محطة واسعة النطاق لتوليد الكهرباء من طاقة الرياح في الخليج العربي، تضم 13 توربيناً عملاقاً بقدرة 50 ميجاواط وتغذي آلاف المنازل بطاقة نظيفة.",
+    quiz:{ question:"ما هو مصدر الطاقة الطبيعي المستخدم لتوليد الكهرباء في محطة هرويل بولاية ثمريت؟", options:["طاقة الرياح عبر توربينات هوائية","الفحم الحجري","الطاقة النووية الحرارية"], answer:"طاقة الرياح عبر توربينات هوائية" },
+    en:{ wilayat:"Thumrait", hint:"The first large-scale wind farm in the Gulf region: 13 giant turbines (50 MW) powering thousands of homes with clean energy.",
+      question:"Which natural energy source generates electricity at the Harweel station in Thumrait?", options:["Wind power via wind turbines","Coal","Nuclear thermal power"] } }
+];
+
+/* Governorate profiles (administrative centre, centre coords, topography, economy) */
+const GOVERNORATES = [
+  { ar:"مسقط", en:"Muscat", cap_ar:"ولاية مسقط", cap_en:"Wilayat of Muscat", c:[23.5880,58.4080], b:[[22.6,57.95],[23.75,59.25]],
+    topo_ar:"شريط ساحلي منبسط تحيط به جبال الحجر الشرقي الكلسية والداكنة، تتخلله أخوار وبنادر طبيعية محمية.",
+    econ_ar:"المركز المالي والإداري للبلاد، قطاعات التجارة والمصارف، الموانئ البحرية، والسياحة الثقافية والخدمات الرقمية.",
+    topo_en:"A flat coastal strip framed by the limestone and dark ophiolite Eastern Hajar mountains, cut by sheltered natural coves and inlets.",
+    econ_en:"The nation's financial and administrative centre: trade and banking, seaports, cultural tourism and digital services." },
+  { ar:"مسندم", en:"Musandam", cap_ar:"ولاية خصب", cap_en:"Wilayat of Khasab", c:[26.1986,56.2486], b:[[25.6,56.0],[26.45,56.55]],
+    topo_ar:"سلاسل جبلية شاهقة تغوص عمودياً في مياه البحر مشكلة \"فيوردات\" وأخواراً تشرف مباشرة على ممر مضيق هرمز الدولي.",
+    econ_ar:"الملاحة والتجارة الإقليمية العابرة، الصيد السمكي، النقل بالعبّارات السريعة، والسياحة البيئية البحرية.",
+    topo_en:"Towering mountains plunging vertically into the sea, forming 'fjords' and inlets overlooking the international Strait of Hormuz.",
+    econ_en:"Navigation and regional transit trade, fishing, fast-ferry transport and marine eco-tourism." },
+  { ar:"البريمي", en:"Al Buraimi", cap_ar:"ولاية البريمي", cap_en:"Wilayat of Al Buraimi", c:[24.2500,55.7833], b:[[23.6,55.2],[24.65,56.3]],
+    topo_ar:"سهول شبه صحراوية وحصوية منبسطة تتخللها واحات وأودية جافة وتحدها جبال الحجر الغربي من الشرق.",
+    econ_ar:"التجارة البينية وإعادة التصدير عبر الحدود، الصناعات الخفيفة والتحويلية في مدينة البريمي الصناعية، والزراعة الواحاتية.",
+    topo_en:"Flat semi-desert gravel plains dotted with oases and dry wadis, bordered by the Western Hajar mountains to the east.",
+    econ_en:"Cross-border trade and re-export, light and manufacturing industries at Buraimi Industrial City, and oasis farming." },
+  { ar:"شمال الباطنة", en:"North Al Batinah", cap_ar:"ولاية صحار", cap_en:"Wilayat of Sohar", c:[24.3636,56.7139], b:[[23.85,56.2],[25.0,57.35]],
+    topo_ar:"سهل ساحلي فيضي عريض وممتد بين مياه بحر عُمان وتلال سلاسل الحجر الغربي الغنية بالثروات المعدنية.",
+    econ_ar:"الصناعات الثقيلة والبتروكيماويات بميناء صحار والمنطقة الحرة، تعدين المعادن، الأنشطة اللوجستية، والإنتاج الزراعي والسمكي.",
+    topo_en:"A broad alluvial coastal plain stretching between the Sea of Oman and the mineral-rich foothills of the Western Hajar.",
+    econ_en:"Heavy industry and petrochemicals at Sohar Port & Freezone, mining, logistics, agriculture and fisheries." },
+  { ar:"جنوب الباطنة", en:"South Al Batinah", cap_ar:"ولاية الرستاق", cap_en:"Wilayat of Rustaq", c:[23.3908,57.4244], b:[[23.0,57.0],[23.95,58.15]],
+    topo_ar:"سهل ساحلي يتدرج جنوباً نحو عيون مائية حارة وأودية جبلية عميقة وشديدة الانحدار تنحدر من الجبل الأخضر.",
+    econ_ar:"التخزين واللوجستيات والموانئ الجافة (مدينة خزائن)، الزراعة، الصناعات التعدينية، والتراث المعماري الدفاعي.",
+    topo_en:"A coastal plain rising south toward hot springs and deep, steep mountain wadis descending from Al Jabal Al Akhdar.",
+    econ_en:"Storage, logistics and dry ports (Khazaen City), agriculture, mining industries and defensive architectural heritage." },
+  { ar:"الداخلية", en:"Ad Dakhiliyah", cap_ar:"ولاية نزوى", cap_en:"Wilayat of Nizwa", c:[22.9333,57.5333], b:[[22.0,56.9],[23.4,58.3]],
+    topo_ar:"هضاب وواحات خصبة تحيط بها أعلى السلاسل الجبلية في شرق الجزيرة العربية (جبل شمس والجبل الأخضر).",
+    econ_ar:"السياحة التراثية والبيئية، الزراعة الشجرية الجبلية عبر المدرجات، ومحطات الطاقة الشمسية الكهروضوئية (مشروع منح).",
+    topo_en:"Plateaus and fertile oases surrounded by the highest mountains in eastern Arabia (Jebel Shams and Al Jabal Al Akhdar).",
+    econ_en:"Heritage and eco-tourism, terraced mountain fruit farming, and solar PV power plants (Manah project)." },
+  { ar:"الظاهرة", en:"Ad Dhahirah", cap_ar:"ولاية عبري", cap_en:"Wilayat of Ibri", c:[23.2372,56.5062], b:[[21.8,55.2],[23.75,57.1]],
+    topo_ar:"سهول منبسطة تتدرج نحو صحراء الربع الخالي غرباً، مع تشكيلات صخرية وأودية موسمية جافة شرقاً.",
+    econ_ar:"استخراج النفط والغاز، توليد الطاقة الشمسية واسعة النطاق (محطة عبري)، المقالع التعدينية، والتبادل التجاري البري.",
+    topo_en:"Flat plains sloping west toward the Rub' al Khali desert, with rock formations and dry seasonal wadis to the east.",
+    econ_en:"Oil and gas extraction, large-scale solar power (Ibri plant), quarrying and overland trade." },
+  { ar:"شمال الشرقية", en:"North Ash Sharqiyah", cap_ar:"ولاية إبراء", cap_en:"Wilayat of Ibra", c:[22.6906,58.5333], b:[[21.6,57.9],[23.0,59.1]],
+    topo_ar:"نطاق جغرافي مركب يجمع بين امتدادات الحجر الشرقي والأودية العذبة الدائمة والبدايات الشمالية لبحر الرمال.",
+    econ_ar:"سياحة المغامرات الصحراوية، زراعة النخيل والخضروات المعتمدة على الأفلاج، والأسواق الحرفية والتراثية التقليدية.",
+    topo_en:"A mixed landscape combining the Eastern Hajar foothills, permanent freshwater wadis and the northern edge of the sand sea.",
+    econ_en:"Desert adventure tourism, falaj-irrigated date palms and vegetables, and traditional craft and heritage markets." },
+  { ar:"جنوب الشرقية", en:"South Ash Sharqiyah", cap_ar:"ولاية صور", cap_en:"Wilayat of Sur", c:[22.5667,59.5289], b:[[20.6,58.3],[22.95,59.9]],
+    topo_ar:"سواحل شاطئية مفتوحة تجمع بين بحر عُمان وبحر العرب، وتبرز فيها رؤوس بحرية صخرية وشواطئ رملية معزولة.",
+    econ_ar:"صناعة وإسالة وتصدير الغاز الطبيعي المسال، الصناعات الخشبية البحرية، الصيد الحرفي، والسياحة البيئية لمحميات السلاحف.",
+    topo_en:"Open coastlines where the Sea of Oman meets the Arabian Sea, with rocky headlands and secluded sandy beaches.",
+    econ_en:"LNG liquefaction and export, traditional wooden shipbuilding, artisanal fishing and turtle-reserve eco-tourism." },
+  { ar:"الوسطى", en:"Al Wusta", cap_ar:"ولاية هيماء", cap_en:"Wilayat of Haima", c:[19.9575,56.2778], b:[[18.5,54.9],[21.4,58.4]],
+    topo_ar:"سهول منبسطة شاسعة (سهل الجدة الحصوي)، وحقول كلسية متآكلة، وسواحل بحرية بكر على بحر العرب.",
+    econ_ar:"قطاع تكرير النفط، الحوض الجاف وإصلاح السفن بالدقم، مشاريع الهيدروجين الأخضر ومزارع الطاقة المتجددة، والثروة السمكية.",
+    topo_en:"Vast flat plains (the Jiddat al-Harasis gravel plain), eroded limestone fields and pristine Arabian Sea coasts.",
+    econ_en:"Oil refining, the Duqm dry dock and ship repair, green hydrogen and renewable-energy farms, and fisheries." },
+  { ar:"ظفار", en:"Dhofar", cap_ar:"ولاية صلالة", cap_en:"Wilayat of Salalah", c:[17.0150,54.0924], b:[[16.6,51.9],[19.6,57.0]],
+    topo_ar:"تباين طبوغرافي استثنائي يجمع بين جبال خضراء تكسوها الرياح الموسمية (الخريف)، وسهل ساحلي، ونجد صحراوي جاف.",
+    econ_ar:"المحطات الإقليمية لإعادة الشحن (ميناء صلالة)، الصناعات الدوائية والغذائية، سياحة الخريف، ومزارع توليد الكهرباء بالرياح.",
+    topo_en:"Exceptional contrast: monsoon-green mountains (Khareef), a coastal plain and the dry desert Najd plateau.",
+    econ_en:"Regional transshipment (Salalah Port), pharmaceutical and food industries, Khareef tourism and wind power." }
+];
+
+/* =====================================================================
+   2) OFFLINE VECTOR BASEMAP — simplified outlines ([lat,lng]) so the map
+      works with zero network (classroom offline / sandboxed previews).
+      Generalised for teaching purposes; not survey-grade boundaries.
+   ===================================================================== */
+const GEO = {
+  omanMain: [
+    [24.98,56.37],[24.74,56.47],[24.50,56.65],[24.37,56.78],[24.17,56.89],[23.97,57.10],[23.85,57.43],[23.74,57.65],
+    [23.69,57.90],[23.67,58.15],[23.63,58.42],[23.63,58.60],[23.50,58.78],[23.27,58.94],[23.05,59.11],[22.83,59.26],
+    [22.70,59.39],[22.58,59.54],[22.53,59.80],[22.43,59.86],[22.10,59.73],[21.85,59.59],[21.45,59.32],[21.05,59.02],
+    [20.78,58.78],[20.58,58.48],[20.42,58.22],[20.25,57.95],[20.00,57.82],[19.68,57.76],[19.30,57.80],[18.97,57.83],
+    [18.86,57.35],[18.62,56.86],[18.30,56.62],[17.94,56.34],[17.85,55.95],[17.74,55.60],[17.45,55.30],[17.20,55.05],
+    [16.97,54.70],[17.02,54.40],[16.98,54.13],[16.94,53.95],[16.86,53.75],[16.74,53.40],[16.66,53.11],
+    [17.60,52.75],[18.40,52.30],[19.00,52.00],[20.00,55.00],[21.50,55.60],[22.70,55.20],[23.00,55.48],[23.60,55.60],
+    [24.00,55.74],[24.20,55.75],[24.30,55.80],[24.45,55.86],[24.58,55.96],[24.75,56.05],[24.86,56.16]
+  ],
+  musandam: [
+    [25.62,56.27],[25.80,56.40],[26.00,56.43],[26.20,56.49],[26.38,56.41],[26.30,56.33],[26.24,56.26],[26.22,56.21],
+    [26.15,56.15],[26.05,56.08],[25.92,56.11],[25.78,56.16]
+  ],
+  masirah: [[20.15,58.62],[20.42,58.75],[20.70,58.91],[20.63,58.97],[20.30,58.83],[20.15,58.69]],
+  daymaniyat: [[23.84,58.02],[23.87,58.05],[23.87,58.13],[23.85,58.15],[23.84,58.08]],
+  neighbours: [
+    [24.98,56.37],[25.30,56.37],[25.62,56.27],[25.78,56.16],[25.92,56.11],[26.05,56.08],[25.80,55.95],[25.55,55.60],
+    [25.25,55.30],[24.95,54.95],[24.45,54.40],[24.15,53.60],[24.20,52.60],[24.25,51.60],[25.00,51.60],[25.90,51.55],
+    [26.15,51.25],[25.60,50.85],[24.75,50.80],[25.60,50.20],[26.50,50.05],[27.00,49.60],[28.00,48.60],[30.50,47.50],
+    [31.00,38.00],[12.40,38.00],[12.60,43.50],[13.00,45.00],[14.00,48.50],[15.00,50.50],[15.60,52.20],[16.40,52.60],
+    [16.66,53.11],[17.60,52.75],[18.40,52.30],[19.00,52.00],[20.00,55.00],[21.50,55.60],[22.70,55.20],[23.00,55.48],
+    [23.60,55.60],[24.00,55.74],[24.20,55.75],[24.30,55.80],[24.45,55.86],[24.58,55.96],[24.75,56.05],[24.86,56.16]
+  ],
+  iran: [[27.50,52.00],[26.60,54.00],[26.55,55.30],[27.10,56.10],[27.15,56.60],[26.20,57.10],[25.70,57.30],[25.60,58.00],
+         [25.45,59.50],[25.20,61.60],[31.00,62.00],[31.00,50.00]],
+  /* Map labels: [lat, lng, ar, en, kind] */
+  labels: [
+    [22.4,61.6,"بحر العرب","Arabian Sea","sea"],[24.9,58.3,"بحر عُمان","Sea of Oman","sea"],[26.6,52.9,"الخليج العربي","Arabian Gulf","sea"],
+    [26.62,56.55,"مضيق هرمز","Strait of Hormuz","strait"],[20.4,51.6,"الربع الخالي","Rub' al Khali","desert"],
+    [24.1,53.9,"الإمارات","UAE","country"],[21.6,48.5,"السعودية","Saudi Arabia","country"],[16.1,49.2,"اليمن","Yemen","country"],
+    [28.0,57.3,"إيران","Iran","country"],[20.9,57.2,"سلطنة عُمان","Sultanate of Oman","oman"]
+  ]
+};
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* Fallback CDN if cdnjs is unreachable */
+if(!window.L){document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');}
+</script>
+<script>
+/* =====================================================================
+   3) APP — Oman Geographic Explorer / مستكشف عُمان الجغرافي
+   Sections: i18n · state · map & basemaps · markers · filters ·
+             governorate card · quiz engine · badges · speech ·
+             distance tool · certificate · confetti · boot
+   ===================================================================== */
+(function(){
+'use strict';
+
+/* ---------- 3.1 Categories (3 pillars) ---------- */
+const ICONS = {
+  heritage:'<path fill="#fff" d="M4 21V10h2V7h2.2v3h2.3V7h3v3h2.3V7H18v3h2v11h-6v-4.2a2 2 0 0 0-4 0V21z"/>',
+  nature:'<circle cx="17" cy="6" r="2.4" fill="#fff"/><path fill="#fff" d="M2 20l6.5-10.5 3.6 5.6 2.6-3.6L22 20z"/>',
+  modern:'<path fill="#fff" d="M13.5 2 5 13.5h5.6L9.4 22 19 9.8h-5.8z"/>'
+};
+const CATS = {
+  heritage:{ ar:"تراث وتاريخ", en:"Heritage & History", color:"#B9722E" },
+  nature:  { ar:"بيئة وطبيعة", en:"Environment & Nature", color:"#2E9E62" },
+  modern:  { ar:"تنمية حديثة ورؤية 2040", en:"Modern Development & Vision 2040", color:"#1A8FC9" }
+};
+const catKey = ar => ar.startsWith("تراث") ? "heritage" : ar.startsWith("بيئة") ? "nature" : "modern";
+LANDMARKS.forEach(l => { l.cat = catKey(l.category); l.gov = GOVERNORATES.find(g => g.ar === l.governorate); });
+
+/* ---------- 3.2 Internationalisation ---------- */
+const T = {
+  ar:{ title:"مستكشف عُمان الجغرافي", subtitle:"أسبوع الوعي الجغرافي · رحلة عبر المحافظات الإحدى عشرة", score:"النقاط", explored:"المستكشَف",
+    certificate:"الشهادة", reset:"رحلة جديدة", categories:"المحاور الموضوعية", governorates:"المحافظات", badges:"الأوسمة والإنجازات",
+    tools:"أدوات المستكشف", measure:"قياس المسافة", clear:"مسح", landmarks:"المعالم الظاهرة", panel:"لوحة المستكشف", all:"كل عُمان",
+    capital:"المركز الإداري", topo:"التضاريس", econ:"الأنشطة الاقتصادية", lmIn:"معالم المحافظة", funFact:"حقيقة ممتعة",
+    listen:"🔊 استمع", stop:"⏹ إيقاف", takeQuiz:"🧭 خُض التحدي الجغرافي", review:"✓ مراجعة إجابتك", quizTitle:"التحدي الجغرافي",
+    correct:"إجابة صحيحة! أحسنت يا مستكشف 🎉  +10 نقاط", wrong:"ليست الإجابة الصحيحة هذه المرة. الإجابة الصحيحة هي: ", done:"متابعة الاستكشاف",
+    already:"لقد أجبت عن هذا السؤال سابقاً — هذه مراجعة لإجابتك.",
+    mIdle:"فعّل الأداة ثم انقر على نقطتين في الخريطة (أو على معلمين) لحساب المسافة.", mOn:"انقر على النقطة الأولى…", mOne:"انقر على النقطة الثانية…",
+    mRes:"المسافة التقريبية (خط مستقيم):", km:"كم", fromTo:"من {a} إلى {b}", point:"نقطة",
+    base_offline:"خريطة عُمان (دون إنترنت)", base_positron:"CartoDB فاتحة", base_osm:"OpenStreetMap", base_sat:"صور فضائية ESRI",
+    noteOffline:"الخريطة المدمجة تعمل دون اتصال بالإنترنت. طبقات البلاطات الحية تُفعَّل عند تشغيل الملف محلياً أو على GitHub Pages.",
+    tilesFail:"تعذّر تحميل طبقة البلاطات هنا — تمت العودة إلى خريطة عُمان المدمجة.", tilesOk:"تم تفعيل الخريطة الحية.",
+    b_heritage:"حارس التراث", b_nature:"صديق البيئة العُمانية", b_vision:"سفير رؤية 2040", b_grand:"بطل جغرافية عُمان",
+    bd_heritage:"استكشف 5 مواقع تراثية", bd_nature:"استكشف 5 محميات وأودية", bd_vision:"أكمل تحديات الطاقة المتجددة والموانئ", bd_grand:"أجب في جميع المحافظات الـ11",
+    newBadge:"وسام جديد: ", certTitle:"شهادة مستكشف عُمان الجغرافي", certSub:"احتفاءً بأسبوع الوعي الجغرافي", yourName:"اكتب اسمك كما تريده على الشهادة",
+    savePng:"حفظ الشهادة (PNG)", print:"طباعة", certLocked:"اجمع 100 نقطة لفتح الشهادة — تبقّى لك {n} نقطة.", certReady:"🎓 أصبحت شهادتك جاهزة! اضغط زر الشهادة.",
+    saved:"تم حفظ الشهادة ✔", saveFail:"تعذّر الحفظ هنا. يمكنك أخذ لقطة شاشة للشهادة.", printNote:"للطباعة: شغّل الملف خارج المعاينة (محلياً أو على GitHub Pages).",
+    resetTitle:"بدء رحلة جديدة؟", resetMsg:"سيتم مسح النقاط والأوسمة وجميع الإجابات المحفوظة على هذا الجهاز.", resetYes:"نعم، ابدأ من جديد", cancel:"إلغاء",
+    resetDone:"بدأت رحلة جديدة. بالتوفيق يا مستكشف! 🧭", noSpeech:"القراءة الصوتية غير مدعومة في هذا المتصفح.", noArVoice:"لا يتوفر صوت عربي على هذا الجهاز؛ قد تُقرأ بصوت افتراضي.",
+    welcome:"مرحباً بك يا مستكشف! انقر على أي دبوس لتبدأ رحلتك 🧭",
+    c_name:"الاسم", c_line1:"تُمنح هذه الشهادة إلى المستكشف/ة", c_line2:"تقديراً لإنجازه في رحلة «مستكشف عُمان الجغرافي» بحصوله على {s} نقطة واستكشاف {e} معلماً من أصل 33",
+    c_week:"أسبوع الوعي الجغرافي", c_foot:"مستكشف عُمان الجغرافي · نحو رؤية عُمان 2040", c_date:"التاريخ", explorer:"مستكشف",
+    pts:"نقطة", wil:"ولاية", yes:"✔", lmSub:"{n} معالم"
+  },
+  en:{ title:"Oman Geographic Explorer", subtitle:"Geography Awareness Week · A journey across 11 governorates", score:"Score", explored:"Explored",
+    certificate:"Certificate", reset:"New Journey", categories:"Thematic Pillars", governorates:"Governorates", badges:"Badges & Achievements",
+    tools:"Explorer Tools", measure:"Measure distance", clear:"Clear", landmarks:"Visible landmarks", panel:"Explorer Panel", all:"All Oman",
+    capital:"Administrative Capital", topo:"Topography", econ:"Economic Activities", lmIn:"Landmarks here", funFact:"Fun Fact",
+    listen:"🔊 Listen", stop:"⏹ Stop", takeQuiz:"🧭 Take the Geo Challenge", review:"✓ Review your answer", quizTitle:"Geo Challenge",
+    correct:"Correct! Great job, explorer 🎉  +10 points", wrong:"Not quite this time. The correct answer is: ", done:"Keep exploring",
+    already:"You already answered this one — here is your answer for review.",
+    mIdle:"Turn the tool on, then click two points on the map (or two landmarks) to measure the distance.", mOn:"Click the first point…", mOne:"Click the second point…",
+    mRes:"Approximate straight-line distance:", km:"km", fromTo:"From {a} to {b}", point:"Point",
+    base_offline:"Oman map (offline)", base_positron:"CartoDB Light", base_osm:"OpenStreetMap", base_sat:"ESRI Satellite",
+    noteOffline:"The built-in map works with no internet. Live tile layers activate when you run the file locally or on GitHub Pages.",
+    tilesFail:"Tile layer can't load here — switched back to the built-in Oman map.", tilesOk:"Live map enabled.",
+    b_heritage:"Heritage Guardian", b_nature:"Nature Explorer", b_vision:"Vision 2040 Ambassador", b_grand:"Grand Oman Geographer",
+    bd_heritage:"Explore 5 heritage sites", bd_nature:"Explore 5 reserves & wadis", bd_vision:"Complete renewable-energy & port quizzes", bd_grand:"Answer in all 11 governorates",
+    newBadge:"New badge: ", certTitle:"Oman Geographic Explorer Certificate", certSub:"Celebrating Geography Awareness Week", yourName:"Type your name as it should appear",
+    savePng:"Save certificate (PNG)", print:"Print", certLocked:"Collect 100 points to unlock the certificate — {n} points to go.", certReady:"🎓 Your certificate is ready! Tap the Certificate button.",
+    saved:"Certificate saved ✔", saveFail:"Couldn't save here. You can take a screenshot of the certificate.", printNote:"To print, open the file outside the preview (locally or on GitHub Pages).",
+    resetTitle:"Start a new journey?", resetMsg:"This clears points, badges and all saved answers on this device.", resetYes:"Yes, start over", cancel:"Cancel",
+    resetDone:"New journey started. Good luck, explorer! 🧭", noSpeech:"Read-aloud isn't supported in this browser.", noArVoice:"No Arabic voice on this device; a default voice may be used.",
+    welcome:"Welcome, explorer! Click any pin to start your journey 🧭",
+    c_name:"Name", c_line1:"This certificate is proudly presented to", c_line2:"for completing the Oman Geographic Explorer quest with {s} points, exploring {e} of 33 landmarks",
+    c_week:"Geography Awareness Week", c_foot:"Oman Geographic Explorer · Towards Oman Vision 2040", c_date:"Date", explorer:"Explorer",
+    pts:"pts", wil:"Wilayat", yes:"✔", lmSub:"{n} landmarks"
+  }
+};
+
+/* ---------- 3.3 State + persistence (localStorage, fail-safe) ---------- */
+const KEY = "omanGeoQuest.v1";
+const store = {
+  get(){ try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ return null; } },
+  set(v){ try { localStorage.setItem(KEY, JSON.stringify(v)); } catch(e){} }
+};
+const saved = store.get() || {};
+const S = {
+  lang: saved.lang || "ar",
+  answers: saved.answers || {},          // { om_01: {correct:true, choice:"..."} }
+  badges: saved.badges || [],            // earned badge ids
+  name: saved.name || "",
+  certNotified: !!saved.certNotified,
+  cats: { heritage:true, nature:true, modern:true },
+  gov: null,                             // selected governorate (ar name) or null
+  base: "offline",
+  measuring: false, mPts: []
+};
+const persist = () => store.set({ lang:S.lang, answers:S.answers, badges:S.badges, name:S.name, certNotified:S.certNotified });
+const t = (k, vars) => { let s = (T[S.lang][k] ?? k); if (vars) for (const v in vars) s = s.replace("{"+v+"}", vars[v]); return s; };
+const L_ = (ar, en) => S.lang === "ar" ? ar : en;
+const score = () => Object.values(S.answers).filter(a => a.correct).length * 10;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+
+/* ---------- 3.4 Map + basemaps ---------- */
+if (!window.L) { document.getElementById("map").innerHTML = '<p style="padding:30px;font:700 16px Cairo">Leaflet failed to load. Check your connection.</p>'; return; }
+
+const OMAN_BOUNDS = L.latLngBounds([16.4, 51.8], [26.6, 60.2]);
+const map = L.map("map", { zoomControl:true, minZoom:5, maxZoom:17, worldCopyJump:false, attributionControl:true, zoomSnap:0.25 })
+  .fitBounds(OMAN_BOUNDS, { padding:[10,10] });
+map.setMaxBounds(L.latLngBounds([5, 35], [36, 72]));
+L.control.scale({ metric:true, imperial:false, position:"bottomright" }).addTo(map);
+map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
+
+/* Offline vector basemap (always available) */
+const offline = L.layerGroup();
+// Graticule every 2° (supports latitude/longitude literacy)
+for (let la = 12; la <= 30; la += 2) L.polyline([[la,36],[la,70]], { color:"#9fc2d4", weight:1, dashArray:"3 6", interactive:false }).addTo(offline);
+for (let lo = 40; lo <= 66; lo += 2) L.polyline([[8,lo],[34,lo]], { color:"#9fc2d4", weight:1, dashArray:"3 6", interactive:false }).addTo(offline);
+L.polygon(GEO.neighbours, { color:"#c9bfae", weight:1, fillColor:"#efe9df", fillOpacity:1, interactive:false }).addTo(offline);
+L.polygon(GEO.iran, { color:"#c9bfae", weight:1, fillColor:"#efe9df", fillOpacity:1, interactive:false }).addTo(offline);
+const omanStyle = { color:"#8a5a2b", weight:2, fillColor:"#ecd2ad", fillOpacity:1, interactive:false };
+[GEO.omanMain, GEO.musandam, GEO.masirah, GEO.daymaniyat].forEach(p => L.polygon(p, omanStyle).addTo(offline));
+const labelLayer = L.layerGroup().addTo(offline);
+function drawLabels(){
+  labelLayer.clearLayers();
+  GEO.labels.forEach(([la, lo, ar, en, kind]) => L.marker([la, lo], { interactive:false, keyboard:false,
+    icon:L.divIcon({ className:"", html:`<span class="map-label ${kind}">${esc(L_(ar,en))}</span>`, iconSize:[0,0] }) }).addTo(labelLayer));
+}
+drawLabels();
+
+const BASES = {
+  offline: offline,
+  positron: L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains:"abcd", maxZoom:19,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>' }),
+  osm: L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19,
+    attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }),
+  sat: L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom:18,
+    attribution:'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics' })
+};
+offline.addTo(map);
+
+function setBase(key, silent){
+  if (key === S.base) return;
+  map.removeLayer(BASES[S.base]); S.base = key; BASES[key].addTo(map); BASES[key].bringToBack?.();
+  renderBasemaps();
+  if (key === "offline") return;
+  // Watch for blocked tiles (e.g., sandboxed previews) and fall back gracefully
+  let ok = 0, bad = 0; const layer = BASES[key];
+  const onLoad = () => ok++, onErr = () => bad++;
+  layer.on("tileload", onLoad).on("tileerror", onErr);
+  setTimeout(() => {
+    layer.off("tileload", onLoad).off("tileerror", onErr);
+    if (S.base === key && ok === 0) { setBase("offline", true); if (!silent) toast("🗺️", t("tilesFail")); }
+    else if (ok > 0 && !silent) toast("🛰️", t("tilesOk"));
+  }, 3500);
+}
+/* Auto-upgrade to live tiles when they're reachable (local / GitHub Pages) */
+(function probeTiles(){
+  const img = new Image(); let done = false;
+  img.onload = () => { if (!done) { done = true; setBase("positron", true); } };
+  img.onerror = () => { done = true; };
+  img.src = "https://a.basemaps.cartocdn.com/light_all/5/21/13.png";
+  setTimeout(() => { done = true; }, 4000);
+})();
+
+/* Live cursor coordinates (spatial literacy) */
+const Coords = L.Control.extend({ options:{ position:"bottomleft" },
+  onAdd(){ this._d = L.DomUtil.create("div","coords"); this._d.textContent = "—"; return this._d; } });
+const coords = new Coords().addTo(map);
+map.on("mousemove", e => coords._d.textContent = `${e.latlng.lat.toFixed(4)}° N, ${e.latlng.lng.toFixed(4)}° E`);
+
+/* ---------- 3.5 Markers ---------- */
+function pinHTML(l){
+  const c = CATS[l.cat].color, a = S.answers[l.id];
+  const st = a ? `<span class="st" style="background:${a.correct ? "var(--ok)" : "#E0912F"}">${a.correct ? "✓" : "!"}</span>` : "";
+  return `<div class="om-pin ${a ? "" : "fresh"}" style="--c:${c}">
+    <span class="pulse"></span>${st}
+    <svg class="pin" width="36" height="46" viewBox="0 0 36 46"><path d="M18 1.5C9.2 1.5 2 8.6 2 17.4 2 28.6 18 44 18 44s16-15.4 16-26.6C34 8.6 26.8 1.5 18 1.5z" fill="${c}" stroke="#fff" stroke-width="2.5"/>
+    <svg x="7" y="6" width="22" height="22" viewBox="0 0 24 24">${ICONS[l.cat]}</svg></svg></div>`;
+}
+const markers = {};
+LANDMARKS.forEach(l => {
+  const m = L.marker([l.lat, l.lng], { icon:L.divIcon({ className:"", html:pinHTML(l), iconSize:[36,46], iconAnchor:[18,45], popupAnchor:[0,-42] }),
+    title:l.name_en, alt:l.name_en, riseOnHover:true });
+  m.on("click", () => S.measuring ? addMeasurePoint(m.getLatLng(), L_(l.name_ar, l.name_en)) : openPopup(l));
+  markers[l.id] = m;
+});
+function refreshPin(id){ const l = LANDMARKS.find(x => x.id === id); markers[id].setIcon(L.divIcon({ className:"", html:pinHTML(l), iconSize:[36,46], iconAnchor:[18,45], popupAnchor:[0,-42] })); }
+function setTooltips(){ LANDMARKS.forEach(l => { markers[l.id].unbindTooltip().bindTooltip(L_(l.name_ar, l.name_en), { direction:"top", offset:[0,-44] }); }); }
+
+/* ---------- 3.6 Popups ---------- */
+function popupHTML(l){
+  const c = CATS[l.cat], a = S.answers[l.id], en = S.lang === "en";
+  return `<div class="pop" style="--c:${c.color}" dir="${en ? "ltr" : "rtl"}">
+    <div class="band"><span class="cat"><svg viewBox="0 0 24 24">${ICONS[l.cat]}</svg>${esc(L_(c.ar, c.en))}</span>
+      <h3>${esc(L_(l.name_ar, l.name_en))}</h3><div class="alt">${esc(L_(l.name_en, l.name_ar))}</div></div>
+    <div class="body">
+      <div class="tags"><span class="tag">📍 ${esc(L_(l.gov.ar, l.gov.en))}</span><span class="tag">🏘️ ${esc(t("wil"))} ${esc(L_(l.wilayat, l.en.wilayat))}</span>
+        <span class="tag co">${l.lat.toFixed(4)}°N, ${l.lng.toFixed(4)}°E</span></div>
+      <div class="fact"><div class="lbl">💡 ${t("funFact")}<button class="speak" data-speak="${l.id}">${t("listen")}</button></div>${esc(L_(l.hint, l.en.hint))}</div>
+      <button class="go ${a ? "done" : ""}" data-quiz="${l.id}">${a ? t("review") : t("takeQuiz")}</button>
+    </div></div>`;
+}
+let openId = null;
+function openPopup(l){
+  openId = l.id;
+  L.popup({ maxWidth:320, minWidth:260, autoPanPadding:[30,80], className:"om-popup" })
+    .setLatLng([l.lat, l.lng]).setContent(popupHTML(l)).openOn(map);
+}
+map.on("popupclose", () => { openId = null; stopSpeech(); });
+document.addEventListener("click", e => {
+  const q = e.target.closest("[data-quiz]"); if (q) { openQuiz(q.dataset.quiz); return; }
+  const s = e.target.closest("[data-speak]"); if (s) { const l = LANDMARKS.find(x => x.id === s.dataset.speak); toggleSpeech(L_(l.hint, l.en.hint), s); return; }
+  const c = e.target.closest("[data-close]"); if (c) closeOv(c.dataset.close);
+});
+
+/* ---------- 3.7 Filters (category + governorate) ---------- */
+const visible = l => S.cats[l.cat] && (!S.gov || l.governorate === S.gov);
+function applyFilters(){
+  LANDMARKS.forEach(l => { const m = markers[l.id]; visible(l) ? m.addTo(map) : m.remove(); });
+  renderList();
+}
+function renderCats(){
+  $("catChips").innerHTML = Object.entries(CATS).map(([k, c]) => {
+    const n = LANDMARKS.filter(l => l.cat === k && (!S.gov || l.governorate === S.gov)).length;
+    return `<button class="cat-chip" style="--c:${c.color}" aria-pressed="${S.cats[k]}" data-cat="${k}">
+      <span class="dot"><svg viewBox="0 0 24 24">${ICONS[k]}</svg></span>${esc(L_(c.ar, c.en))}<span class="n">${n}</span></button>`;
+  }).join("");
+}
+$("catChips").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if (!b) return; S.cats[b.dataset.cat] = !S.cats[b.dataset.cat]; renderCats(); applyFilters(); });
+
+function govDone(g){ return LANDMARKS.some(l => l.governorate === g.ar && S.answers[l.id]); }
+function renderGovs(){
+  const doneN = GOVERNORATES.filter(govDone).length;
+  $("govCount").textContent = `${doneN}/11`;
+  $("govRibbon").innerHTML = `<button class="gov-chip ${!S.gov ? "active" : ""}" data-gov="">🇴🇲 ${t("all")}</button>` +
+    GOVERNORATES.map(g => `<button class="gov-chip ${S.gov === g.ar ? "active" : ""}" data-gov="${esc(g.ar)}">${esc(L_(g.ar, g.en))}${govDone(g) ? ' <span class="tick">✓</span>' : ""}</button>`).join("");
+}
+$("govRibbon").addEventListener("click", e => { const b = e.target.closest("[data-gov]"); if (!b) return; selectGov(b.dataset.gov || null); });
+
+let capMarker = null;
+function selectGov(ar){
+  S.gov = ar; map.closePopup();
+  if (capMarker) { capMarker.remove(); capMarker = null; }
+  if (ar) {
+    const g = GOVERNORATES.find(x => x.ar === ar);
+    map.flyToBounds(g.b, { padding:[30,30], duration:1.4 });
+    capMarker = L.marker(g.c, { icon:L.divIcon({ className:"", html:'<div class="cap-pin">★</div>', iconSize:[26,26], iconAnchor:[13,13] }), zIndexOffset:-100 })
+      .bindTooltip(`${t("capital")}: ${L_(g.cap_ar, g.cap_en)}`, { direction:"top", offset:[0,-14] }).addTo(map);
+  } else {
+    map.flyToBounds(OMAN_BOUNDS, { padding:[10,10], duration:1.2 });
+  }
+  renderGovs(); renderCats(); renderGovCard(); applyFilters();
+  if (window.innerWidth <= 900 && ar) $("side").classList.add("open");
+}
+
+/* ---------- 3.8 Governorate showcase card ---------- */
+function renderGovCard(){
+  const host = $("govCardHost");
+  if (!S.gov) { host.innerHTML = ""; return; }
+  const g = GOVERNORATES.find(x => x.ar === S.gov);
+  const lms = LANDMARKS.filter(l => l.governorate === g.ar);
+  host.innerHTML = `<div class="gov-card">
+    <div class="top"><span>${esc(L_("محافظة", "Governorate"))}</span><h3>${esc(L_(g.ar, g.en))}</h3><span>${esc(L_(g.en, g.ar))}</span>
+      <button class="x" id="govClose" aria-label="close">✕</button></div>
+    <div class="gov-row"><span class="ic">🏛️</span><div><b>${t("capital")}</b>${esc(L_(g.cap_ar, g.cap_en))} <span style="direction:ltr;display:inline-block;color:var(--muted);font-size:12px">(${g.c[0].toFixed(4)}°N, ${g.c[1].toFixed(4)}°E)</span></div></div>
+    <div class="gov-row"><span class="ic">⛰️</span><div><b>${t("topo")}</b>${esc(L_(g.topo_ar, g.topo_en))}</div></div>
+    <div class="gov-row"><span class="ic">⚙️</span><div><b>${t("econ")}</b>${esc(L_(g.econ_ar, g.econ_en))}</div></div>
+    <div class="gov-row"><span class="ic">📍</span><div><b>${t("lmIn")}</b>${lms.map(l => `<span style="color:${CATS[l.cat].color};font-weight:800">●</span> ${esc(L_(l.name_ar, l.name_en))}`).join("<br>")}</div></div>
+  </div>`;
+  $("govClose").onclick = () => selectGov(null);
+}
+
+/* ---------- 3.9 Landmark list ---------- */
+function renderList(){
+  const vis = LANDMARKS.filter(visible);
+  $("lmCount").textContent = vis.length;
+  $("lmList").innerHTML = vis.map(l => { const a = S.answers[l.id];
+    return `<button class="lm-item" data-fly="${l.id}"><span class="sw" style="background:${CATS[l.cat].color}"></span>${esc(L_(l.name_ar, l.name_en))}
+      <span class="st">${a ? (a.correct ? "✅" : "🟠") : "○"}</span></button>`; }).join("");
+}
+$("lmList").addEventListener("click", e => { const b = e.target.closest("[data-fly]"); if (!b) return;
+  const l = LANDMARKS.find(x => x.id === b.dataset.fly);
+  if (window.innerWidth <= 900) $("side").classList.remove("open");
+  map.flyTo([l.lat, l.lng], Math.max(map.getZoom(), 9), { duration:1.1 });
+  map.once("moveend", () => openPopup(l));
+});
+
+/* ---------- 3.10 Quiz engine ---------- */
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function openQuiz(id){
+  const l = LANDMARKS.find(x => x.id === id), a = S.answers[id];
+  const ansIdx = l.quiz.options.indexOf(l.quiz.answer);
+  const order = shuffle([0,1,2]);
+  const q = L_(l.quiz.question, l.en.question), opts = S.lang === "ar" ? l.quiz.options : l.en.options;
+  $("quizModal").style.setProperty("--c", CATS[l.cat].color);
+  $("qTitle").textContent = t("quizTitle") + " · " + L_(l.name_ar, l.name_en);
+  $("qSub").textContent = `${L_(l.gov.ar, l.gov.en)} — ${L_(l.wilayat, l.en.wilayat)}`;
+  $("qText").textContent = q;
+  $("qDone").textContent = t("done");
+  const fb = $("qFb"); fb.className = "feedback"; fb.textContent = "";
+  const keys = S.lang === "ar" ? ["أ","ب","ج"] : ["A","B","C"];
+  $("qOpts").innerHTML = order.map((oi, k) => `<button class="opt" data-oi="${oi}"><span class="k">${keys[k]}</span><span>${esc(opts[oi])}</span></button>`).join("");
+  const lock = (chosen) => {
+    $("qOpts").querySelectorAll(".opt").forEach(b => { const oi = +b.dataset.oi; b.disabled = true;
+      if (oi === ansIdx) b.classList.add("correct"); else if (oi === chosen) b.classList.add("wrong"); else b.classList.add("dim"); });
+  };
+  if (a) { // review mode
+    lock(l.quiz.options.indexOf(a.choice));
+    fb.className = "feedback show " + (a.correct ? "ok" : "no");
+    fb.textContent = t("already") + " " + (a.correct ? "✅" : t("wrong") + opts[ansIdx]);
+  } else {
+    $("qOpts").onclick = e => {
+      const b = e.target.closest(".opt"); if (!b || b.disabled) return;
+      const chosen = +b.dataset.oi, ok = chosen === ansIdx;
+      $("qOpts").onclick = null; lock(chosen);
+      S.answers[id] = { correct:ok, choice:l.quiz.options[chosen], t:Date.now() };
+      persist();
+      fb.className = "feedback show " + (ok ? "ok" : "no");
+      fb.textContent = ok ? t("correct") : t("wrong") + opts[ansIdx];
+      chime(ok);
+      if (ok) { confetti(90); $("scorePill").classList.remove("bump"); void $("scorePill").offsetWidth; $("scorePill").classList.add("bump"); }
+      afterAnswer(id);
+    };
+  }
+  openOv("quizOv");
+}
+function afterAnswer(id){
+  refreshPin(id); updateStats(); renderGovs(); renderList(); checkBadges();
+  if (openId === id) { const l = LANDMARKS.find(x => x.id === id); map.closePopup(); openPopup(l); }
+  if (score() >= 100 && !S.certNotified) { S.certNotified = true; persist(); setTimeout(() => toast("🎓", t("certReady")), 900); }
+}
+
+/* ---------- 3.11 Badges ---------- */
+const VISION_IDS = ["om_18","om_21","om_33","om_06","om_12","om_30"]; // renewables + ports
+const BADGES = [
+  { id:"heritage", em:"🏰", need:5, prog:() => LANDMARKS.filter(l => l.cat === "heritage" && S.answers[l.id]).length },
+  { id:"nature",   em:"🐢", need:5, prog:() => LANDMARKS.filter(l => l.cat === "nature" && S.answers[l.id]).length },
+  { id:"vision",   em:"☀️", need:VISION_IDS.length, prog:() => VISION_IDS.filter(i => S.answers[i]).length },
+  { id:"grand",    em:"🏆", need:11, prog:() => GOVERNORATES.filter(govDone).length }
+];
+function renderBadges(){
+  $("badges").innerHTML = BADGES.map(b => { const p = Math.min(b.prog(), b.need), e = S.badges.includes(b.id);
+    return `<div class="badge ${e ? "earned" : ""}" title="${esc(t("bd_" + b.id))}"><span class="em">${b.em}</span><span class="nm">${esc(t("b_" + b.id))}</span>
+      <div class="pr"><i style="width:${p / b.need * 100}%"></i></div><span class="ct">${p}/${b.need} · ${esc(t("bd_" + b.id))}</span></div>`; }).join("");
+}
+function checkBadges(){
+  BADGES.forEach(b => { if (!S.badges.includes(b.id) && b.prog() >= b.need) { S.badges.push(b.id); persist();
+    setTimeout(() => { toast(b.em, t("newBadge") + t("b_" + b.id)); confetti(220); }, 700); } });
+  renderBadges();
+}
+
+/* ---------- 3.12 Stats ---------- */
+function updateStats(){
+  $("scoreVal").textContent = score();
+  $("exploredVal").textContent = `${Object.keys(S.answers).length}/33`;
+  $("certBtn").title = score() >= 100 ? "" : t("certLocked", { n:100 - score() });
+}
+
+/* ---------- 3.13 Read-aloud (Web Speech API) ---------- */
+let speakingBtn = null;
+function stopSpeech(){ try { speechSynthesis.cancel(); } catch(e){} if (speakingBtn) { speakingBtn.classList.remove("on"); speakingBtn.textContent = t("listen"); speakingBtn = null; } }
+function toggleSpeech(text, btn){
+  if (!("speechSynthesis" in window)) { toast("🔇", t("noSpeech")); return; }
+  if (speakingBtn === btn) { stopSpeech(); return; }
+  stopSpeech();
+  const u = new SpeechSynthesisUtterance(text);
+  const want = S.lang === "ar" ? "ar" : "en";
+  const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith(want));
+  u.lang = S.lang === "ar" ? (v?.lang || "ar-SA") : (v?.lang || "en-US"); if (v) u.voice = v;
+  u.rate = S.lang === "ar" ? 0.9 : 0.95;
+  if (!v && want === "ar") toast("🔈", t("noArVoice"));
+  u.onend = u.onerror = () => { if (speakingBtn === btn) stopSpeech(); };
+  speakingBtn = btn; btn.classList.add("on"); btn.textContent = t("stop");
+  speechSynthesis.speak(u);
+}
+if ("speechSynthesis" in window) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
+
+/* ---------- 3.14 Distance tool (haversine) ---------- */
+const measureLayer = L.layerGroup().addTo(map);
+const haversine = (a, b) => { const R = 6371, r = Math.PI / 180, dLa = (b.lat - a.lat) * r, dLo = (b.lng - a.lng) * r;
+  const h = Math.sin(dLa / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
+let mLast = null;
+function renderMeasure(){
+  const out = $("measureOut");
+  $("measureBtn").classList.toggle("on", S.measuring);
+  map.getContainer().classList.toggle("leaflet-crosshair", S.measuring);
+  if (mLast) { out.innerHTML = `${t("mRes")}<br><strong>${mLast.d.toLocaleString(S.lang === "ar" ? "ar-OM" : "en-US", { maximumFractionDigits:1 })} ${t("km")}</strong><br>${esc(t("fromTo", { a:mLast.a, b:mLast.b }))}`; return; }
+  out.textContent = !S.measuring ? t("mIdle") : (S.mPts.length ? t("mOne") : t("mOn"));
+}
+function addMeasurePoint(ll, name){
+  if (S.mPts.length >= 2) { measureLayer.clearLayers(); S.mPts = []; mLast = null; }
+  S.mPts.push({ ll, name:name || `${t("point")} (${ll.lat.toFixed(2)}, ${ll.lng.toFixed(2)})` });
+  L.marker(ll, { icon:L.divIcon({ className:"", html:'<div class="measure-pt"></div>', iconSize:[16,16], iconAnchor:[8,8] }), interactive:false }).addTo(measureLayer);
+  if (S.mPts.length === 2) {
+    const [p, q] = S.mPts, d = haversine(p.ll, q.ll);
+    L.polyline([p.ll, q.ll], { color:"#1A8FC9", weight:4, dashArray:"10 8", interactive:false }).addTo(measureLayer);
+    L.tooltip({ permanent:true, direction:"center", className:"dist-label" }).setLatLng([(p.ll.lat + q.ll.lat) / 2, (p.ll.lng + q.ll.lng) / 2])
+      .setContent(`${d.toFixed(1)} ${t("km")}`).addTo(measureLayer);
+    mLast = { d, a:p.name, b:q.name };
+  }
+  renderMeasure();
+}
+map.on("click", e => { if (S.measuring) addMeasurePoint(e.latlng); });
+$("measureBtn").onclick = () => { S.measuring = !S.measuring; if (S.measuring) map.closePopup(); renderMeasure();
+  if (S.measuring && window.innerWidth <= 900) $("side").classList.remove("open"); };
+$("measureClear").onclick = () => { measureLayer.clearLayers(); S.mPts = []; mLast = null; renderMeasure(); };
+
+/* ---------- 3.15 Basemap switcher ---------- */
+function renderBasemaps(){
+  $("basemaps").innerHTML = ["offline","positron","osm","sat"].map(k =>
+    `<label><input type="radio" name="base" value="${k}" ${S.base === k ? "checked" : ""}> ${esc(t("base_" + k))}</label>`).join("");
+  $("baseNote").textContent = S.base === "offline" ? t("noteOffline") : "";
+}
+$("basemaps").addEventListener("change", e => { if (e.target.name === "base") setBase(e.target.value); });
+
+/* ---------- 3.16 Overlays, toasts, sound ---------- */
+function openOv(id){ $(id).classList.add("show"); }
+function closeOv(id){ $(id).classList.remove("show"); }
+document.querySelectorAll(".overlay").forEach(o => o.addEventListener("click", e => { if (e.target === o) closeOv(o.id); }));
+document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll(".overlay.show").forEach(o => closeOv(o.id)); });
+function toast(em, msg){
+  const d = document.createElement("div"); d.className = "toast"; d.innerHTML = `<span class="em">${em}</span><span>${esc(msg)}</span>`;
+  const box=$("toasts"); box.appendChild(d); while(box.children.length>3) box.firstChild.remove(); setTimeout(() => { d.style.transition = "opacity .4s"; d.style.opacity = 0; setTimeout(() => d.remove(), 400); }, 3800);
+}
+let actx = null;
+function chime(ok){
+  try { actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = ok ? [523.25, 659.25, 783.99] : [311.13, 261.63];
+    notes.forEach((f, i) => { const o = actx.createOscillator(), g = actx.createGain(); o.type = ok ? "triangle" : "sine"; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, actx.currentTime + i * 0.12); g.gain.exponentialRampToValueAtTime(0.18, actx.currentTime + i * 0.12 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + i * 0.12 + 0.3); o.connect(g).connect(actx.destination);
+      o.start(actx.currentTime + i * 0.12); o.stop(actx.currentTime + i * 0.12 + 0.32); });
+  } catch(e){}
+}
+
+/* ---------- 3.17 Confetti ---------- */
+const cv = $("confetti"), cx = cv.getContext("2d"); let parts = [], raf = null;
+function confetti(n){
+  cv.width = innerWidth; cv.height = innerHeight;
+  const cols = ["#E3B23C","#D4A373","#1B9C6B","#1A8FC9","#B9722E","#D64545","#fff"];
+  for (let i = 0; i < n; i++) parts.push({ x:innerWidth / 2 + (Math.random() - .5) * 200, y:innerHeight * .35, vx:(Math.random() - .5) * 14, vy:-Math.random() * 13 - 4,
+    s:Math.random() * 7 + 5, r:Math.random() * 6, vr:(Math.random() - .5) * .3, c:cols[i % cols.length], life:0 });
+  if (!raf) raf = requestAnimationFrame(tick);
+}
+function tick(){
+  cx.clearRect(0, 0, cv.width, cv.height);
+  parts.forEach(p => { p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+    cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c; cx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); cx.restore(); });
+  parts = parts.filter(p => p.y < cv.height + 20 && p.life < 260);
+  raf = parts.length ? requestAnimationFrame(tick) : (cx.clearRect(0, 0, cv.width, cv.height), null);
+}
+
+/* ---------- 3.18 Certificate (Canvas, client-side) ---------- */
+let DL = null; // platform downloads capability (only inside Claude artifacts)
+try { if (window.claude && typeof window.claude.use === "function") window.claude.use("downloads").then(x => DL = x).catch(() => {}); } catch(e){}
+const inFrame = (() => { try { return window.self !== window.top; } catch(e){ return true; } })();
+
+function star(ctx, x, y, r, col){ ctx.save(); ctx.translate(x, y); ctx.fillStyle = col; ctx.beginPath();
+  for (let i = 0; i < 16; i++) { const a = i * Math.PI / 8, rr = i % 2 ? r * .45 : r; ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); ctx.restore(); }
+async function drawCert(){
+  const c = $("certCanvas"), x = c.getContext("2d"), W = c.width, H = c.height, ar = S.lang === "ar";
+  try { await Promise.all([document.fonts.load("900 60px Cairo"), document.fonts.load("700 30px Cairo")]); } catch(e){}
+  x.direction = ar ? "rtl" : "ltr"; x.textAlign = "center"; x.textBaseline = "middle";
+  // background
+  const bg = x.createLinearGradient(0, 0, W, H); bg.addColorStop(0, "#FFFBF3"); bg.addColorStop(1, "#F6EBDA"); x.fillStyle = bg; x.fillRect(0, 0, W, H);
+  // sand-dune waves
+  x.fillStyle = "rgba(212,163,115,.18)"; x.beginPath(); x.moveTo(0, H); for (let i = 0; i <= W; i += 20) x.lineTo(i, H - 120 - Math.sin(i / 140) * 40); x.lineTo(W, H); x.fill();
+  x.fillStyle = "rgba(29,53,87,.06)"; x.beginPath(); x.moveTo(0, H); for (let i = 0; i <= W; i += 20) x.lineTo(i, H - 70 - Math.cos(i / 110) * 30); x.lineTo(W, H); x.fill();
+  // borders
+  x.lineWidth = 26; x.strokeStyle = "#1D3557"; x.strokeRect(13, 13, W - 26, H - 26);
+  x.lineWidth = 4; x.strokeStyle = "#E3B23C"; x.strokeRect(46, 46, W - 92, H - 92);
+  x.lineWidth = 1.5; x.strokeStyle = "#D4A373"; x.strokeRect(58, 58, W - 116, H - 116);
+  [[58,58],[W-58,58],[58,H-58],[W-58,H-58]].forEach(([a, b]) => star(x, a, b, 30, "#E3B23C"));
+  // seal
+  x.save(); x.translate(W / 2, 150); star(x, 0, 0, 62, "#E3B23C"); x.beginPath(); x.arc(0, 0, 40, 0, 7); x.fillStyle = "#1D3557"; x.fill();
+  x.font = "44px serif"; x.fillText("🧭", 0, 3); x.restore();
+  // texts
+  x.fillStyle = "#1D3557"; x.font = "900 66px Cairo"; x.fillText(t("certTitle"), W / 2, 270);
+  x.fillStyle = "#B9722E"; x.font = "700 30px Cairo"; x.fillText(t("c_week") + " · " + (ar ? "Geography Awareness Week" : "أسبوع الوعي الجغرافي"), W / 2, 330);
+  x.fillStyle = "#5f6f82"; x.font = "600 32px Cairo"; x.fillText(t("c_line1"), W / 2, 410);
+  const nm = (S.name || "").trim() || t("explorer");
+  x.fillStyle = "#b8862a"; x.font = "900 84px Cairo"; x.fillText(nm, W / 2, 505);
+  x.strokeStyle = "#E3B23C"; x.lineWidth = 3; x.beginPath(); x.moveTo(W / 2 - 380, 565); x.lineTo(W / 2 + 380, 565); x.stroke();
+  x.fillStyle = "#1d2a3a"; x.font = "600 30px Cairo";
+  wrap(x, t("c_line2", { s:score(), e:Object.keys(S.answers).length }), W / 2, 625, 1150, 48);
+  // badges row
+  const bs = BADGES.filter(b => S.badges.includes(b.id));
+  const show = bs.length ? bs : [];
+  const gap = 260, start = W / 2 - (show.length - 1) * gap / 2;
+  show.forEach((b, i) => { const bx = start + i * gap, by = 800;
+    x.beginPath(); x.arc(bx, by, 58, 0, 7); x.fillStyle = "#fff"; x.fill(); x.lineWidth = 5; x.strokeStyle = "#E3B23C"; x.stroke();
+    x.font = "54px serif"; x.fillStyle = "#000"; x.fillText(b.em, bx, by + 4);
+    x.font = "800 24px Cairo"; x.fillStyle = "#1D3557"; x.fillText(t("b_" + b.id), bx, by + 92); });
+  if (!show.length) { x.font = "700 64px Cairo"; x.fillStyle = "#E3B23C"; x.fillText("⭐ " + score() + " " + t("pts") + " ⭐", W / 2, 810); }
+  // footer
+  const d = new Date().toLocaleDateString(ar ? "ar-OM" : "en-GB", { year:"numeric", month:"long", day:"numeric" });
+  x.font = "700 26px Cairo"; x.fillStyle = "#457B9D"; x.fillText(`${t("c_date")}: ${d}`, W / 2, 965);
+  x.font = "800 26px Cairo"; x.fillStyle = "#1D3557"; x.fillText(t("c_foot"), W / 2, 1010);
+}
+function wrap(ctx, text, cx_, y, maxW, lh){
+  const words = text.split(" "); let line = "", lines = [];
+  words.forEach(w => { const test = line ? line + " " + w : w; if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; } else line = test; });
+  lines.push(line); lines.forEach((l, i) => ctx.fillText(l, cx_, y + i * lh));
+}
+$("certBtn").onclick = () => {
+  if (score() < 100) { toast("🔒", t("certLocked", { n:100 - score() })); return; }
+  $("certName").value = S.name; $("certPrint").style.display = inFrame ? "none" : "";
+  $("certNote").textContent = inFrame ? t("printNote") : ""; openOv("certOv"); drawCert();
+};
+$("certName").addEventListener("input", e => { S.name = e.target.value; persist(); drawCert(); });
+$("certSave").onclick = async () => {
+  const blob = await new Promise(r => $("certCanvas").toBlob(r, "image/png"));
+  if (DL) { try { await DL.save({ filename:"oman-explorer-certificate.png", data:blob }); toast("🎓", t("saved")); return; }
+    catch(e){ if (e && e.code === "declined") return; } }
+  try { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "oman-explorer-certificate.png";
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    if (inFrame) setTimeout(() => toast("ℹ️", t("saveFail")), 600);
+  } catch(e){ toast("⚠️", t("saveFail")); }
+};
+$("certPrint").onclick = () => { $("printImg").src = $("certCanvas").toDataURL("image/png"); setTimeout(() => window.print(), 150); };
+
+/* ---------- 3.19 Reset ---------- */
+$("resetBtn").onclick = () => openOv("resetOv");
+$("resetYes").onclick = () => {
+  S.answers = {}; S.badges = []; S.certNotified = false; persist(); closeOv("resetOv"); map.closePopup();
+  LANDMARKS.forEach(l => refreshPin(l.id)); updateStats(); renderGovs(); renderBadges(); renderList(); toast("🧭", t("resetDone"));
+};
+
+/* ---------- 3.20 Language toggle ---------- */
+function applyLang(){
+  document.documentElement.lang = S.lang; document.documentElement.dir = S.lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
+  $("langLbl").textContent = S.lang === "ar" ? "English" : "العربية";
+  document.title = S.lang === "ar" ? "مستكشف عُمان الجغرافي | Oman Geographic Explorer" : "Oman Geographic Explorer | مستكشف عُمان الجغرافي";
+  drawLabels(); setTooltips(); renderCats(); renderGovs(); renderGovCard(); renderBadges(); renderList(); renderMeasure(); renderBasemaps(); updateStats();
+  if (capMarker && S.gov) { const g = GOVERNORATES.find(x => x.ar === S.gov); capMarker.setTooltipContent(`${t("capital")}: ${L_(g.cap_ar, g.cap_en)}`); }
+  if (openId) openPopup(LANDMARKS.find(x => x.id === openId));
+  if (mLast) { mLast = null; measureLayer.clearLayers(); S.mPts = []; renderMeasure(); }
+}
+$("langBtn").onclick = () => { stopSpeech(); S.lang = S.lang === "ar" ? "en" : "ar"; persist(); applyLang(); };
+
+/* ---------- 3.21 Mobile drawer ---------- */
+$("fab").onclick = () => $("side").classList.toggle("open");
+map.on("click", () => { if (window.innerWidth <= 900 && !S.measuring) $("side").classList.remove("open"); });
+
+/* ---------- 3.22 Boot ---------- */
+applyLang(); applyFilters(); checkBadges();
+setTimeout(() => toast("🧭", t("welcome")), 600);
+window.addEventListener("resize", () => map.invalidateSize());
+})();
+
+</script>
+</body>
+</html>
